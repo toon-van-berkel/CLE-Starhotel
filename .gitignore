@@ -10,6 +10,8 @@ node_modules
 
 # OS
 .DS_Store
+.idea
+.vscode
 Thumbs.db
 
 # Env
