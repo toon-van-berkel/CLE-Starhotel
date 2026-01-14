@@ -5,6 +5,7 @@
             
         </div>
         <div class="flex">
+            <li><a href="/details">Details</a></li>
             <li><a href="/rooms">Rooms</a></li>
             <li><a href="/about">About</a></li>
         </div>
