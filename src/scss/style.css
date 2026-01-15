@@ -1,5 +1,62 @@
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+}
+.carousel-container .main-image-wrapper .nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+.carousel-container .main-image-wrapper .nav-btn.prev {
+  left: 10px;
+}
+.carousel-container .main-image-wrapper .nav-btn.next {
+  right: 10px;
+}
+.carousel-container .main-image-wrapper .main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.carousel-container .indicators-images {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+.carousel-container .indicators-images .indicator img {
+  width: 100px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+.carousel-container .indicators-images .indicator.active {
+  background-color: #0e4a5a;
+}
+
 .bg-primary {
-  background-color: #0E4A5A;
+  background-color: #0e4a5a;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
