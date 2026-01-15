@@ -1,5 +1,6 @@
 <script>
   import "../../scss/_details.scss";
+
   import images from "$lib/imageData/imageData.json";
 
   let currentIndex = 0;
