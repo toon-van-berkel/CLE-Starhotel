@@ -5,12 +5,10 @@
   gap: 2rem;
   margin-inline: auto;
 }
-
-.details-intro {
+.details-container .details-intro {
   grid-column: 1/-1;
 }
-
-.details-header {
+.details-container .details-header {
   text-align: left;
   font-size: 2.5rem;
   margin: 2rem 0;
@@ -25,22 +23,24 @@
   flex-direction: column;
   justify-content: space-between;
 }
-
-.reservation-content {
+.reservation-card .reservation-content {
   background-color: #f9f9f9;
 }
-.reservation-content h2 {
+.reservation-card .reservation-content h2,
+.reservation-card .reservation-content p {
   background-color: #f9f9f9;
 }
-.reservation-content p {
-  background-color: #f9f9f9;
+.reservation-card .price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 1rem 0;
 }
 
 .content-column {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  min-width: 0; /* Prevents overflow issues in grid */
+  min-width: 0;
 }
 
 .room-details-card {
@@ -59,12 +59,6 @@
   border-radius: 4px;
 }
 
-.price {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 1rem 0;
-}
-
 .reserve-btn {
   width: 100%;
   padding: 0.8rem;
@@ -77,7 +71,6 @@
   transition: background-color 0.2s;
   margin-top: 1rem;
 }
-
 .reserve-btn:hover {
   background-color: var(--primary-color-dark, #0087ac);
 }
@@ -85,7 +78,7 @@
 .rooms-btn {
   width: 100%;
   padding: 0.8rem;
-  background-color: var(--primary-color, #d4d4d4);
+  background-color: #d4d4d4;
   color: black;
   border: none;
   border-radius: 4px;
@@ -94,21 +87,18 @@
   transition: background-color 0.2s;
   margin-top: 1rem;
 }
-
 .rooms-btn:hover {
-  background-color: var(--primary-color-dark, #b9b9b9);
+  background-color: #b9b9b9;
 }
 
 /* --- Carousel styles --- */
 .carousel-container {
   position: relative;
 }
-
-.main-image-wrapper {
+.carousel-container .main-image-wrapper {
   position: relative;
 }
-
-.main-image {
+.carousel-container .main-image-wrapper .main-image {
   width: 100%;
   display: block;
   border-radius: 8px;
@@ -116,8 +106,7 @@
   -o-object-fit: cover;
      object-fit: cover;
 }
-
-.nav-btn {
+.carousel-container .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -129,16 +118,13 @@
   font-size: 24px;
   z-index: 10;
 }
-
-.nav-btn.prev {
+.carousel-container .nav-btn.prev {
   left: 10px;
 }
-
-.nav-btn.next {
+.carousel-container .nav-btn.next {
   right: 10px;
 }
-
-.overlay-btn {
+.carousel-container .overlay-btn {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
@@ -152,8 +138,7 @@
   z-index: 10;
   transition: background-color 0.2s;
 }
-
-.overlay-btn:hover {
+.carousel-container .overlay-btn:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -165,9 +150,10 @@
   gap: 10px;
   margin-top: 10px;
 }
-
-.indicator,
-.thumbnail-btn {
+.indicators-images .indicator,
+.indicators-images .thumbnail-btn,
+.thumbnails .indicator,
+.thumbnails .thumbnail-btn {
   background: none;
   border: 2px solid transparent;
   padding: 0;
@@ -175,21 +161,28 @@
   opacity: 0.7;
   transition: opacity 0.2s, border-color 0.2s;
 }
-
-.indicator:hover,
-.thumbnail-btn:hover {
+.indicators-images .indicator:hover,
+.indicators-images .thumbnail-btn:hover,
+.thumbnails .indicator:hover,
+.thumbnails .thumbnail-btn:hover {
   opacity: 1;
 }
-
-.indicator.active,
-.thumbnail-btn.active {
+.indicators-images .indicator.active,
+.indicators-images .thumbnail-btn.active,
+.thumbnails .indicator.active,
+.thumbnails .thumbnail-btn.active {
   border-color: var(--primary-color, #007bff);
   border-radius: 6px;
   opacity: 1;
 }
-
-.indicator img,
-.thumbnail-image {
+.indicators-images .indicator img,
+.indicators-images .indicator .thumbnail-image,
+.indicators-images .thumbnail-btn img,
+.indicators-images .thumbnail-btn .thumbnail-image,
+.thumbnails .indicator img,
+.thumbnails .indicator .thumbnail-image,
+.thumbnails .thumbnail-btn img,
+.thumbnails .thumbnail-btn .thumbnail-image {
   display: block;
   -o-object-fit: cover;
      object-fit: cover;
@@ -206,7 +199,6 @@
   height: 67px;
 }
 
-/* Hide one of the thumbnail sections to avoid redundancy */
 .indicators-images {
   display: none;
 }
