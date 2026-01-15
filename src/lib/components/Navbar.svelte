@@ -1,5 +1,5 @@
 <nav>
-    <ul>
+    <ul class="nav-ul">
         <div class="flex">
             <li><a class="bg-primary :hover" href="/home">home</a></li>
             

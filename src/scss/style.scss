@@ -1,4 +1,12 @@
 @import "./details.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f8f3ee;
+}
+
 .bg-primary {
   background-color: #0e4a5a;
   color: white;
@@ -17,7 +25,7 @@ hr {
   border-top: 2px solid #000000;
 }
 
-ul {
+.nav-ul {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
