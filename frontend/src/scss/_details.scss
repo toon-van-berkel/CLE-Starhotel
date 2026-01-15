@@ -1,4 +1,3 @@
-// Variables
 $primary-color: var(--primary-color, #0f4a5a);
 $primary-dark: var(--primary-color-dark, #0087ac);
 $border-color: #ccc;
@@ -51,7 +50,7 @@ $border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  min-width: 0; // Prevents overflow issues in grid
+  min-width: 0;
 }
 
 .room-details-card {
@@ -72,7 +71,6 @@ $border-radius: 8px;
   }
 }
 
-// Button mixin to reduce repetition
 @mixin btn-style($bg, $color, $hover-bg) {
   width: 100%;
   padding: 0.8rem;
@@ -98,7 +96,6 @@ $border-radius: 8px;
   @include btn-style(#d4d4d4, black, #b9b9b9);
 }
 
-/* --- Carousel styles --- */
 .carousel-container {
   position: relative;
 
