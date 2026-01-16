@@ -1,233 +1,45 @@
-.details-container {
-  max-width: 1400px;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  margin-inline: auto;
-}
-.details-container .details-intro {
-  grid-column: 1/-1;
-}
-.details-container .details-header {
-  text-align: left;
-  font-size: 2.5rem;
-  margin: 2rem 0;
-}
-
-.reservation-card {
-  border: 1px solid #ccc;
-  padding: 1.5rem;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.reservation-card .reservation-content {
-  background-color: #f9f9f9;
-}
-.reservation-card .reservation-content h2,
-.reservation-card .reservation-content p {
-  background-color: #f9f9f9;
-}
-.reservation-card .price {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 1rem 0;
-}
-
-.content-column {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  min-width: 0;
-}
-
-.room-details-card {
-  border: 1px solid #ccc;
-  padding: 1.5rem;
-  border-radius: 8px;
-}
-.room-details-card .facilities-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-.room-details-card .facilities-container .facility-card {
-  padding: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-}
-
-.reserve-btn {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: var(--primary-color, #0f4a5a);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s;
-  margin-top: 1rem;
-}
-.reserve-btn:hover {
-  background-color: var(--primary-color-dark, #0087ac);
-}
-
-.rooms-btn {
-  width: 100%;
-  padding: 0.8rem;
-  background-color: #d4d4d4;
-  color: black;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s;
-  margin-top: 1rem;
-}
-.rooms-btn:hover {
-  background-color: #b9b9b9;
-}
-
-.carousel-container {
-  position: relative;
-}
-.carousel-container .main-image-wrapper {
-  position: relative;
-}
-.carousel-container .main-image-wrapper .main-image {
-  width: 100%;
-  display: block;
-  border-radius: 8px;
-  aspect-ratio: 16/9;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.carousel-container .nav-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  font-size: 24px;
-  z-index: 10;
-}
-.carousel-container .nav-btn.prev {
-  left: 10px;
-}
-.carousel-container .nav-btn.next {
-  right: 10px;
-}
-.carousel-container .overlay-btn {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
-  z-index: 10;
-  transition: background-color 0.2s;
-}
-.carousel-container .overlay-btn:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-}
-
-.indicators-images,
-.thumbnails {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-.indicators-images .indicator,
-.indicators-images .thumbnail-btn,
-.thumbnails .indicator,
-.thumbnails .thumbnail-btn {
-  background: none;
-  border: 2px solid transparent;
-  padding: 0;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.2s, border-color 0.2s;
-}
-.indicators-images .indicator:hover,
-.indicators-images .thumbnail-btn:hover,
-.thumbnails .indicator:hover,
-.thumbnails .thumbnail-btn:hover {
-  opacity: 1;
-}
-.indicators-images .indicator.active,
-.indicators-images .thumbnail-btn.active,
-.thumbnails .indicator.active,
-.thumbnails .thumbnail-btn.active {
-  border-color: var(--primary-color, #007bff);
-  border-radius: 6px;
-  opacity: 1;
-}
-.indicators-images .indicator img,
-.indicators-images .indicator .thumbnail-image,
-.indicators-images .thumbnail-btn img,
-.indicators-images .thumbnail-btn .thumbnail-image,
-.thumbnails .indicator img,
-.thumbnails .indicator .thumbnail-image,
-.thumbnails .thumbnail-btn img,
-.thumbnails .thumbnail-btn .thumbnail-image {
-  display: block;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: 4px;
-}
-
-.indicator img {
-  width: 80px;
-  height: 50px;
-}
-
-.thumbnail-image {
-  width: 100px;
-  height: 67px;
-}
-
-.indicators-images {
-  display: none;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #f8f3ee;
+}
+
+body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+nav, footer, main {
+  width: 100%;
+  max-width: 1500px;
+}
+
+main {
+  padding: 25px 30px;
 }
 
 .bg-primary {
-  background-color: #0e4a5a;
+  background-color: #0E4A5A;
   color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  font-size: 1.1rem;
+  padding: 1rem 1.1rem;
+  border-radius: 15px;
   text-decoration: none;
   margin: 5px 10px;
 }
-.bg-primary :hover {
-  background-color: #1caed3;
+.bg-primary:hover {
+  background-color: #0B3A46;
 }
 
 hr {
-  margin-top: 0;
+  width: 100%;
   border: none;
-  border-top: 2px solid #000000;
+  border-top: 1px solid #000000;
 }
 
-.nav-ul {
+nav ul {
   display: flex;
   justify-content: space-between;
   list-style-type: none;
@@ -241,5 +53,53 @@ hr {
 }
 
 nav {
-  margin: 0 30px 20px 30px;
+  padding: 20px 30px;
+}
+
+.navinfo {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1em;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+.navinfo:hover {
+  border-color: rgba(0, 0, 0, 0.2509803922);
+}
+
+.lightgraytext {
+  color: #A9A9A9;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+.textcenter {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.header {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.ordernumber {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin: 3%;
+}
+
+.confirmtext {
+  font-size: 1rem;
+  margin: 5%;
+}
+
+.listtext {
+  font-size: 1rem;
+  margin: 2%;
+  max-width: 10%;
 }/*# sourceMappingURL=style.css.map */

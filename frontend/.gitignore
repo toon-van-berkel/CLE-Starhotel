@@ -1,6 +1,4 @@
 node_modules
-package-lock.json
-package.json
 
 # Output
 .output
@@ -13,8 +11,6 @@ package.json
 # OS
 .DS_Store
 Thumbs.db
-.idea
-.Thumbs.db
 
 # Env
 .env
