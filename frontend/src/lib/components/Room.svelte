@@ -24,7 +24,7 @@
     <div class="room-container">
         <div class="popular">Popular</div>
         <img class="room-image" src="" alt="Room {room.id} image">
-        <div>
+        <div class="room-body">
             <h2>Deluxe Room</h2>
             <article>
                 <p class=room-pricing><bold>&euro;149,99</bold> <small>Per night.</small></p>
