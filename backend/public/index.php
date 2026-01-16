@@ -29,5 +29,10 @@ if ($method === 'GET' && $uri === '/api/me') {
   exit;
 }
 
+if ($method === 'GET' && $uri === '/api/confirm') {
+  require __DIR__ . '/../src/controllers/confirm/confirmation.php';
+  exit;
+}
+
 http_response_code(404);
 echo json_encode(['error' => 'Not found'], JSON_UNESCAPED_UNICODE);
