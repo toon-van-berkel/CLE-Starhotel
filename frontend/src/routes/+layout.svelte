@@ -1,19 +1,10 @@
 <script lang="ts">
-<<<<<<< Updated upstream
-  import favicon from "$lib/assets/favicon.svg";
-  import Navbar from "$lib/components/Navbar.svelte";
-  import Footer from "$lib/components/Footer.svelte";
-  import { onMount } from "svelte";
-  import { authStore } from "$lib/api/stores/auth";
-  import "../scss/style.css";
-=======
 	import favicon from '$lib/assets/favicon.svg';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { onMount } from 'svelte';
 	import { authStore } from '$lib/api/stores/auth';
 	import "../scss/style.css"
->>>>>>> Stashed changes
 
   let { children } = $props();
 
