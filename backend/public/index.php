@@ -1,12 +1,27 @@
 <?php
 declare(strict_types=1);
+
 require_once __DIR__ . '/../src/config/bootstrap.php';
+
+header('Content-Type: application/json; charset=utf-8');
 
 $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
+// Preflight / CORS OPTIONS (handig bij fetch)
+if ($method === 'OPTIONS') {
+  http_response_code(204);
+  exit;
+}
+
 // Rooms
 if ($method === 'GET' && $uri === '/api/rooms') {
+  require __DIR__ . '/../src/controllers/rooms/index.php';
+  exit;
+}
+
+// Backward compatibility (als je /api/index nog ergens gebruikt)
+if ($method === 'GET' && $uri === '/api/index') {
   require __DIR__ . '/../src/controllers/rooms/index.php';
   exit;
 }
@@ -30,4 +45,6 @@ if ($method === 'GET' && $uri === '/api/me') {
 }
 
 http_response_code(404);
-echo json_encode(['error' => 'Not found'], JSON_UNESCAPED_UNICODE);
+echo json_encode([
+  'error' => 'Not found'
+], JSON_UNESCAPED_UNICODE);
