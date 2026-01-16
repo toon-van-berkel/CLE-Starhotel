@@ -15,15 +15,40 @@
   // export let room: Room;
 </script>
 
+<h2>Hello World!</h2>
+<div class="rooms-container">
 {#each rooms as room}
-<div>
-    <!-- <p>id: {room.id}</p> -->
-    <p>Max capacity: {room.max_capacity}</p>
-    <p>Current capacity{room.current_capacity}</p>
-    <p>Floot: {room.floor}</p>
-    <p>Location: {room.location}</p>
-    <p>Wing: {room.wing}</p>
-    <p>Number: {room.number}</p>
-</div>
+    {#if !rooms}
+        <h2>Fatal error, no rooms available</h2>
+    {/if}
+    <div class="room-container">
+        <div class="popular">Popular</div>
+        <img class="room-image" src="" alt="Room {room.id} image">
+        <div>
+            <h2>Deluxe Room</h2>
+            <article>
+                <p class=room-pricing><bold>&euro;149,99</bold> <small>Per night.</small></p>
+                <p class="room-description">Room description goes here!</p>
+            </article>
+            <div class="room-data">
+                <a href="/">Bekijk kamer</a>
+                <p><small>Max: {room.max_capacity}</small></p>
+            </div>
+            
+            <!-- Room detail information! -->
+            <!-- <p>Max capacity: {room.max_capacity}</p>
+            <p>Current capacity{room.current_capacity}</p>
+            <p>Floor: {room.floor}</p>
+            <p>Location: {room.location}</p>
+            <p>Wing: {room.wing}</p>
+            <p>Number: {room.number}</p>
+         -->
+            <!--Might need to add room description, pricing etc-->
+        </div>
+        <!-- <p>id: {room.id}</p> -->
+        
+    </div>
+
 
 {/each}
+</div>

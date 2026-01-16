@@ -1,0 +1,31 @@
+.rooms-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+
+        .room-container {
+            display: flex;
+            flex-flow: column;
+
+        .popular {
+            background-color: orange;
+            height: fit-content;
+            width: fit-content;
+            padding: 12px 20px;
+            border-radius: .8em;
+        }
+
+        .room-image {
+            object-fit: fill;
+            background-color: aqua;
+        }
+
+        .room-data {
+            display: flex;
+
+        }
+    }
+    
+}

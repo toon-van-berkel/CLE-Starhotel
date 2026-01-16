@@ -1,1 +1,28 @@
-/*# sourceMappingURL=style.css.map */
+.rooms-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+}
+.rooms-container .room-container {
+  display: flex;
+  flex-flow: column;
+}
+.rooms-container .room-container .popular {
+  background-color: orange;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 12px 20px;
+  border-radius: 0.8em;
+}
+.rooms-container .room-container .room-image {
+  -o-object-fit: fill;
+     object-fit: fill;
+  background-color: aqua;
+}
+.rooms-container .room-container .room-data {
+  display: flex;
+}/*# sourceMappingURL=style.css.map */
