@@ -43,6 +43,10 @@ if ($method === 'GET' && $uri === '/api/me') {
   require __DIR__ . '/../src/controllers/user/me.php';
   exit;
 }
+if ($method === 'GET' && $uri === '/api/detail') {
+  require __DIR__ . '/../src/controllers/rooms/index.php';
+  exit;
+}
 
 http_response_code(404);
 echo json_encode([

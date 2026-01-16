@@ -1,7 +1,19 @@
-<script>
-  import "../../scss/_details.scss";
+<script lang="ts">
+    import "../../scss/_details.scss";
+    import { onMount } from 'svelte';
+    import { detailPage } from '$lib/api/room/records';
+    import type { Room } from '$lib/api/types/room';
 
-  import images from "$lib/imageData/imageData.json";
+
+	let id = $props();
+
+let room: Room;
+
+    onMount(async () => {
+        const res = await detailPage(id);
+        room = res.room;
+        console.log(room);
+    });
 
   let currentIndex = 0;
 
@@ -19,6 +31,8 @@
   }
 </script>
 
+
+<!-- 
 <div class="details-container">
   <div class="details-intro">
     <h1 class="details-header">Deluxe Room</h1>
@@ -32,7 +46,7 @@
       <div class="main-image-wrapper">
         <button
           class="nav-btn prev"
-          on:click={prevImage}
+          onclick={prevImage}
           aria-label="Previous image">←</button
         >
         <img
@@ -42,7 +56,7 @@
         />
         <button
           class="nav-btn next"
-          on:click={nextImage}
+          onclick={nextImage}
           aria-label="Next image">→</button
         >
         <button class="overlay-btn">Klik om foto te vergroten</button>
@@ -52,7 +66,7 @@
         {#each images as image, index}
           <button
             class="indicator {index === currentIndex ? 'active' : ''}"
-            on:click={() => selectImage(index)}
+            onclick={() => selectImage(index)}
             aria-label="Go to image {index + 1}"
           >
             <img src={image.src} alt={image.alt} />
@@ -63,7 +77,7 @@
         {#each images as image, index}
           <button
             class="thumbnail-btn {index === currentIndex ? 'active' : ''}"
-            on:click={() => selectImage(index)}
+            onclick={() => selectImage(index)}
             aria-label="Select image {index + 1}"
           >
             <img class="thumbnail-image" src={image.src} alt={image.alt} />
@@ -107,4 +121,4 @@
       </a>
     </div>
   </div>
-</div>
+</div> -->

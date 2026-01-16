@@ -14,3 +14,15 @@ export function getRooms() {
 // Optioneel: backward compatibility (als je oude calls nog gebruikt)
 export const records = getRooms;
     
+
+export function detailPage(id: number) {
+    console.log(JSON.stringify({id}));
+    return api<{ room: Room['id'] }>('/detail', {
+        method: 'POST',
+        body: JSON.stringify({ id })
+    });
+}
+
+
+
+// export const record = getRoomDetails();

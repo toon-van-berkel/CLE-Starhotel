@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { records } from "$lib/api/room/records";
     import type { Room } from "$lib/api/types/room";  
+    
 
     let rooms: Room[] = [];
     let error: string | null = null;
@@ -31,7 +32,7 @@
                 <p class="room-description">Room description goes here!</p>
             </article>
             <div class="room-data">
-                <a href="/">Bekijk kamer</a>
+                <a href="/details-{room.id}">Bekijk kamer</a>
                 <p><small>Max: {room.max_capacity}</small></p>
             </div>
             
