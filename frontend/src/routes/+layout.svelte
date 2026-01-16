@@ -5,15 +5,15 @@
 	import { authStore } from '$lib/api/stores/auth';
 	import '../scss/style.css';
 
-	let { children } = $props();
+  let { children } = $props();
 
-	onMount(() => {
-		authStore.init();
-	});
+  onMount(() => {
+    authStore.init();
+  });
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+  <link rel="icon" href={favicon} />
 </svelte:head>
 
 <Navbar></Navbar>
