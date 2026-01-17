@@ -43,7 +43,7 @@ if ($method === 'GET' && $uri === '/api/me') {
   require __DIR__ . '/../src/controllers/user/me.php';
   exit;
 }
-if ($method === 'GET' && $uri === '/api/detail') {
+if ($method === 'POST' && $uri === '/api/detail') {
   require __DIR__ . '/../src/controllers/rooms/index.php';
   exit;
 }

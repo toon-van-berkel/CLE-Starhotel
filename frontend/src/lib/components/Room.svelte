@@ -32,7 +32,7 @@
                 <p class="room-description">Room description goes here!</p>
             </article>
             <div class="room-data">
-                <a href="/details-{room.id}">Bekijk kamer</a>
+                <a href={`/details/${room.id}`}>Bekijk kamer</a>
                 <p><small>Max: {room.max_capacity}</small></p>
             </div>
             

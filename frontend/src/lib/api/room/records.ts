@@ -15,14 +15,24 @@ export function getRooms() {
 export const records = getRooms;
     
 
-export function detailPage(id: number) {
-    console.log(JSON.stringify({id}));
-    return api<{ room: Room['id'] }>('/detail', {
-        method: 'POST',
-        body: JSON.stringify({ id })
-    });
-}
+// export function detailPage(id: number) {
+//     return api<{ room: Room['id'] }>('/detail', {
+//         method: 'POST',
+//         body: JSON.stringify({ id })
+//     });
+// }
 
+export type RoomDetailResponse = {
+  record: Room | null;
+  error?: string;
+};
+
+export function detailPage(id: number) {
+  return api<RoomDetailResponse>('/detail', {
+    method: 'POST',
+    body: JSON.stringify({ id })
+  });
+}
 
 
 // export const record = getRoomDetails();

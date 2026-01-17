@@ -21,7 +21,7 @@ try {
 
         echo json_encode([
             'record' => $room
-        ], JSON_UNESCAPED_UNICODE);
+        ]);
 
         exit;
 
