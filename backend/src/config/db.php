@@ -11,7 +11,7 @@ function db(): PDO
     if ($pdo instanceof PDO) return $pdo;
 
     $host = env('DB_HOST', '127.0.0.1');
-    $db   = env('DB_NAME', 'test');
+    $db   = env('DB_NAME', 'cle2');
     $user = env('DB_USER', 'root');
     $pass = env('DB_PASS', '');
     $charset = env('DB_CHARSET', 'utf8mb4');

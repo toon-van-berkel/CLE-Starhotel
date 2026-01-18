@@ -1,9 +1,9 @@
 <script lang="ts">
-  import favicon from "$lib/assets/favicon.svg";
-  import Navbar from "$lib/components/Navbar.svelte";
-  import { onMount } from "svelte";
-  import { authStore } from "$lib/api/stores/auth";
-  import "../scss/style.css";
+	import favicon from '$lib/assets/favicon.svg';
+	import Navbar from '$lib/components/Navbar.svelte';
+	import { onMount } from 'svelte';
+	import { authStore } from '$lib/api/stores/auth';
+	import '../scss/style.css';
 
   let { children } = $props();
 
@@ -17,4 +17,7 @@
 </svelte:head>
 
 <Navbar></Navbar>
-{@render children()}
+<main>
+	{@render children()}
+</main>
+
