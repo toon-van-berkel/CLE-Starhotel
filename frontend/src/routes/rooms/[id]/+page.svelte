@@ -53,19 +53,20 @@ let room: Room;
     <li>Location: {data.room.location}</li>
   </ul>
 {/if} -->
+
 <script lang="ts">
   import type { Room } from '$lib/api/types/room';
 
-  let { data } = $props<{ data: { room: Room | null; error: string | null } }>();
+  let { data } = $props<{ 
+    data: { 
+      room: Room | null; 
+      error: string | null 
+    } 
+  }>();
+
+  console.log('Room data:', data);
 </script>
 
-{#if data.error}
-  <p>{data.error}</p>
-{:else if !data.room}
-  <p>Room not found.</p>
-{:else}
-  <h1>Room {data.room.number}</h1>
-{/if}
 <!-- 
 <div class="details-container">
   <div class="details-intro">

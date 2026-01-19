@@ -43,10 +43,14 @@ if ($method === 'GET' && $uri === '/api/me') {
   require __DIR__ . '/../src/controllers/user/me.php';
   exit;
 }
-if ($method === 'POST' && $uri === '/api/detail') {
-  require __DIR__ . '/../src/controllers/rooms/index.php';
-  exit;
+
+if ($method === 'GET' && preg_match('#^/api/rooms/(\d+)/?$#', $uri, $matches)) {
+    $_GET['id'] = (int) $matches[1];
+    require __DIR__ . '/../src/controllers/rooms/detail.php';
+    exit;
 }
+
+
 
 http_response_code(404);
 echo json_encode([

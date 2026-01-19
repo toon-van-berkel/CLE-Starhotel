@@ -34,5 +34,9 @@ export function detailPage(id: number) {
   });
 }
 
+export function getDetailPage(id: number) {
+  return api<RoomDetailResponse>(`/rooms/${id}`, {method: "GET"});
+}
+
 
 // export const record = getRoomDetails();
