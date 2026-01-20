@@ -1,7 +1,8 @@
 import { API_BASE } from '$lib/api/config/base';
+import type { FetchLike } from '$lib/api/client/apiTypes';
 
-export async function api<T>(path: string, init: RequestInit = {}): Promise<T> {
-    const res = await fetch(`${API_BASE}${path}`, {
+export async function api<T>(fetchFn: FetchLike, path: string, init: RequestInit = {}): Promise<T> {
+    const res = await fetchFn(`${API_BASE}${path}`, {
         ...init,
         headers: {
             Accept: 'application/json',

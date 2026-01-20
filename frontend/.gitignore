@@ -1,6 +1,6 @@
 node_modules
-package-lock.json
 package.json
+package-lock.json
 
 # Output
 .output
@@ -25,3 +25,5 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+certs
+svelte.config.js

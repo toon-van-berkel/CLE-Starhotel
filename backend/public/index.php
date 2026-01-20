@@ -10,7 +10,11 @@ if ($method === 'GET' && $uri === '/api/rooms') {
   require __DIR__ . '/../src/controllers/rooms/index.php';
   exit;
 }
-
+if ($method === 'GET' && preg_match('#^/api/rooms/room-(\d+)/?$#', $uri, $matches)) {
+  $_GET['id'] = (int) $matches[1];
+  require __DIR__ . '/../src/controllers/rooms/detail.php';
+  exit;
+}
 // User auth
 if ($method === 'POST' && $uri === '/api/register') {
   require __DIR__ . '/../src/controllers/user/register.php';
