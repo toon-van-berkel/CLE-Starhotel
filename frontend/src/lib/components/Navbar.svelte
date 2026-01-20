@@ -1,7 +1,7 @@
 <nav>
     <ul class="nav-ul">
         <div class="flex">
-            <li><a class="bg-primary :hover" href="/home">home</a></li>
+            <li><a class="bg-primary :hover" href="/">home</a></li>
             
         </div>
         <div class="flex">

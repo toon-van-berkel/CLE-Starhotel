@@ -16,11 +16,11 @@ export type EndpointShape = {
 };
 
 export const endpoints = {
+    // Room
     rooms: {
         get: (fetch: FetchLike) =>
             api<ApiGetMap['rooms']['output']>(fetch, '/api/rooms', { method: 'GET' })
     },
-
     room: {
         get: (fetch: FetchLike, payload: ApiGetMap['room']['input']) =>
             api<ApiGetMap['room']['output']>(fetch, `/api/rooms/room-${payload.id}`, { method: 'GET' }),
@@ -30,5 +30,20 @@ export const endpoints = {
                 method: 'POST',
                 body: JSON.stringify(payload)
             })
+    },
+
+    // Contact
+    contacts: {
+        get: (fetch: FetchLike) => api<ApiGetMap['contacts']['output']>(fetch, '/api/contact', { method: 'GET' })
+    },
+    contact: {
+        get: (fetch: FetchLike, payload: ApiGetMap['contact']['input']) =>
+        api<ApiGetMap['contact']['output']>(fetch, `/api/contact/contact-${payload.id}`, { method: 'GET' }),
+
+        submit: (fetch: FetchLike, payload: ApiSubmitMap['contact']['input']) =>
+        api<ApiSubmitMap['contact']['output']>(fetch, '/api/contact', {
+            method: 'POST',
+            body: JSON.stringify(payload)
+        })
     }
 } satisfies EndpointShape;
