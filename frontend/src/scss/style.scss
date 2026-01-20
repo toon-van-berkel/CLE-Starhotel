@@ -1,14 +1,42 @@
-// div {
-//     width: 100px;
+@import "./details.scss";
 
-//     padding: 20px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f8f3ee;
+}
 
-//     p,h1,span {
-//         color: red;
-//     padding: 20px;
-//     }
-// }
+.bg-primary {
+  background-color: #0e4a5a;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  margin: 5px 10px;
 
-// div span{
-//     padding: 0;
-// }
+  & :hover {
+    background-color: #1caed3;
+  }
+}
+hr {
+  margin-top: 0;
+  border: none;
+  border-top: 2px solid #000000;
+}
+
+.nav-ul {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+}
+.flex {
+  display: flex;
+  gap: 50px;
+}
+
+nav {
+  margin: 0 30px 20px 30px;
+}
