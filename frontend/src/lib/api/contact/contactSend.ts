@@ -1,4 +1,4 @@
-import { api } from "$lib/api/client/api";
+import { api } from "$lib/api/client/apiBase";
 
 export type ContactPayload = {
   //data die wordt verstuurd naar de backend
@@ -11,7 +11,7 @@ export type ContactResponse = {
 };
 
 export function sendContact(payload: ContactPayload) {
-  return api<ContactResponse>("/contact", {
+  return api<ContactResponse>(fetch, "/contact", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
