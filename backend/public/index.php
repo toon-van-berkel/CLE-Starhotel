@@ -45,11 +45,10 @@ if ($method === 'GET' && $uri === '/api/me') {
 }
 
 if ($method === 'GET' && preg_match('#^/api/rooms/(\d+)/?$#', $uri, $matches)) {
-    $_GET['id'] = (int) $matches[1];
-    require __DIR__ . '/../src/controllers/rooms/detail.php';
-    exit;
+  $_GET['id'] = (int) $matches[1];
+  require __DIR__ . '/../src/controllers/rooms/detail.php';
+  exit;
 }
-
 
 
 http_response_code(404);

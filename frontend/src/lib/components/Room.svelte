@@ -16,7 +16,7 @@
   // export let room: Room;
 </script>
 
-<h2>Hello World!</h2>
+<!-- <h2>Hello World!</h2> -->
 <div class="rooms-container">
 {#each rooms as room}
     {#if !rooms}
@@ -32,7 +32,7 @@
                 <p class="room-description">Room description goes here!</p>
             </article>
             <div class="room-data">
-                <a href={`rooms/${room.id}`}>Bekijk kamer</a>
+                <a href={`rooms/${room.id}`} data-sveltekit-reload>Bekijk kamer</a>
                 <p><small>Max: {room.max_capacity}</small></p>
             </div>
             

@@ -1,5 +1,6 @@
 import { api } from '$lib/api/client/api';
 import type { Room } from '$lib/api/types/__index__';
+import { PUBLIC_API_BASE } from '$env/static/public';
 
 export type RoomsResponse = {
     records: Room[];
@@ -27,15 +28,17 @@ export type RoomDetailResponse = {
   error?: string;
 };
 
-export function detailPage(id: number) {
-  return api<RoomDetailResponse>('/detail', {
-    method: 'POST',
-    body: JSON.stringify({ id })
+export async function getDetailPage(id: number, fetchFn: typeof fetch) {
+  const res = await fetchFn(`${PUBLIC_API_BASE}/api/rooms/${id}`, {
+    method: 'GET',
+    headers: { Accept: 'application/json' }
   });
-}
+  
+  if (!res.ok) {
+    return { record: null, error: `${res.status} ${res.statusText}` } satisfies RoomDetailResponse;
+  }
 
-export function getDetailPage(id: number) {
-  return api<RoomDetailResponse>(`/rooms/${id}`, {method: "GET"});
+  return (await res.json()) as RoomDetailResponse;
 }
 
 

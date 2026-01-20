@@ -1,18 +1,10 @@
 <?php
 declare(strict_types=1);
-
-require_once __DIR__ . '/../../../config/db.php';
+require_once __DIR__ . '/../../config/db.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
 $id = $_GET['id'] ?? null;
-
-// if (!$id) {
-//     http_response_code(400);
-//     echo json_encode(['error' => 'Missing room id']);
-//     exit;
-// }
-
 
 try {
     $pdo = db();
