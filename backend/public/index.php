@@ -34,5 +34,10 @@ if ($method === 'GET' && $uri === '/api/confirm') {
   exit;
 }
 
+if ($method === 'POST' && $uri === '/api/contact') {
+  require __DIR__ . '/../src/controllers/contact/submit.php';
+  exit;
+}
+
 http_response_code(404);
 echo json_encode(['error' => 'Not found'], JSON_UNESCAPED_UNICODE);
