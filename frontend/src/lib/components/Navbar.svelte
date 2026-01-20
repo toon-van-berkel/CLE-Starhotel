@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
     import { authStore } from '$lib/api/stores/auth';
     import { userIsLoggedIn } from '$lib/api/auth/guards';
 
@@ -16,4 +16,4 @@
             <li><a href="/profile">Profile</a></li>
         {/if}
     </ul>
-</nav>
+</nav> -->

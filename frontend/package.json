@@ -1,5 +1,5 @@
 {
-	"name": "cle",
+	"name": "frontend",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -21,4 +21,3 @@
 		"vite": "^7.2.6"
 	}
 }
-			

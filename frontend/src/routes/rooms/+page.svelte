@@ -1,0 +1,1 @@
+<a href="/rooms/room-{1}">Room 1</a>

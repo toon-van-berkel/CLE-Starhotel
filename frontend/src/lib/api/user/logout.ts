@@ -1,5 +1,5 @@
-import { api } from '$lib/api/client/api';
+// import { api } from '$lib/api/client/api';
 
-export function logout() {
-    return api<{ ok: true }>('/logout', { method: 'POST' });
-}
+// export function logout() {
+//     return api<{ ok: true }>('/logout', { method: 'POST' });
+// }
