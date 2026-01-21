@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import { API_BASE } from '$env/static/private';
+import { PUBLIC_API_BASE } from '$env/static/public';
 
 const HOP_BY_HOP = new Set([
     'connection',
@@ -27,20 +27,20 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     // Only proxy /api/*
     if (url.pathname.startsWith('/api/')) {
-        const upstreamUrl = `${API_BASE}${url.pathname}${url.search}`;
+        const upstreamUrl = `${PUBLIC_API_BASE}${url.pathname}${url.search}`;
 
         const upstreamRes = await fetch(upstreamUrl, {
-        method: request.method,
-        headers: forwardHeaders(request),
-        body: ['GET', 'HEAD'].includes(request.method)
-            ? undefined
-            : await request.arrayBuffer()
+            method: request.method,
+            headers: forwardHeaders(request),
+            body: ['GET', 'HEAD'].includes(request.method)
+                ? undefined
+                : await request.arrayBuffer()
         });
 
         // Return upstream response (streamed), keep status + headers
         return new Response(upstreamRes.body, {
-        status: upstreamRes.status,
-        headers: upstreamRes.headers
+            status: upstreamRes.status,
+            headers: upstreamRes.headers
         });
     }
 

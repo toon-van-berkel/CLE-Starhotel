@@ -48,14 +48,8 @@ export const endpoints = {
 
 	// Auth
 	me: {
-		get: (fetch: FetchLike) => api<ApiGetMap['me']['output']>(fetch, '/api/me', { method: 'GET' })
-	},
-	register: {
-		submit: (fetch: FetchLike, payload: ApiSubmitMap['register']['input']) =>
-			api<ApiSubmitMap['register']['output']>(fetch, '/api/register', {
-				method: 'POST',
-				body: JSON.stringify(payload)
-			})
+		get: (fetch: FetchLike) =>
+			api<ApiGetMap['me']['output']>(fetch, '/api/me', { method: 'GET' })
 	},
 	login: {
 		submit: (fetch: FetchLike, payload: ApiSubmitMap['login']['input']) =>
@@ -64,10 +58,15 @@ export const endpoints = {
 				body: JSON.stringify(payload)
 			})
 	},
+	register: {
+		submit: (fetch: FetchLike, payload: ApiSubmitMap['register']['input']) =>
+			api<ApiSubmitMap['register']['output']>(fetch, '/api/register', {
+				method: 'POST',
+				body: JSON.stringify(payload)
+			})
+	},
 	logout: {
 		submit: (fetch: FetchLike) =>
-			api<ApiSubmitMap['logout']['output']>(fetch, '/api/logout', {
-				method: 'POST'
-			})
+			api<ApiSubmitMap['logout']['output']>(fetch, '/api/logout', { method: 'POST' })
 	}
 } satisfies EndpointShape;
