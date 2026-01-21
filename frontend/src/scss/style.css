@@ -202,11 +202,65 @@
   display: none;
 }
 
+.rooms-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  max-width: 1500px;
+}
+.rooms-container .room-container {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.rooms-container .room-container .room-body {
+  padding: 8px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.rooms-container .room-container .room-body .room-data {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.rooms-container .room-container .popular {
+  position: absolute;
+  top: 8px;
+  left: 20px;
+  left: 8px 20px;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: orange;
+  padding: 8px 20px;
+  border-radius: 8px;
+  z-index: 2;
+}
+.rooms-container .room-container .room-image {
+  -o-object-fit: fill;
+     object-fit: fill;
+  background-color: aqua;
+  height: 15dvh;
+  padding: 0;
+  overflow: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #f8f3ee;
+}
+
+main {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 50px 0 50px;
 }
 
 .bg-primary {

@@ -1,9 +1,27 @@
+<<<<<<< HEAD
 import { PUBLIC_API_BASE } from "$env/static/public";
 import type { FetchLike } from "$lib/api/client/apiTypes";
 
 export async function api<T>(
   fetchFn: FetchLike,
   path: string,
+=======
+import { PUBLIC_API_BASE } from '$env/static/public';
+import type { FetchLike } from '$lib/api/client/apiTypes';
+
+export async function api<T>(fetchFn: FetchLike, path: string, init: RequestInit = {}): Promise<T> {
+    console.log(`${PUBLIC_API_BASE}${path}`)
+    const res = await fetchFn(`${PUBLIC_API_BASE}${path}`, {
+        ...init,
+        credentials: 'include',
+        cache: 'no-store',
+        headers: {
+            Accept: 'application/json',
+            ...(init.body ? { 'Content-Type': 'application/json' } : {}),
+            ...(init.headers || {})
+        },
+    });
+>>>>>>> c2278691bf80584e22740a245eb2de5a24c31d4f
 
   init: RequestInit = {}
 ): Promise<T> {
