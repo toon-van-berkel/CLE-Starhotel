@@ -3,5 +3,5 @@
 <a href="/details">Details</a>
 <ul>
     <li><a href="/test/rooms">Test rooms</a></li>
-    <li><a href="/test/contacts">Test contacts</a></li>
+    <li><a href="/test/contact">Test contacts</a></li>
 </ul>
