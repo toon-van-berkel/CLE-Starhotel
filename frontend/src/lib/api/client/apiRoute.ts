@@ -38,7 +38,7 @@ export const endpoints = {
     },
     contact: {
         get: (fetch: FetchLike, payload: ApiGetMap['contact']['input']) =>
-            api<ApiGetMap['contact']['output']>(fetch, `/api/contact/contact-${payload.id}`, { method: 'GET' }),
+        api<ApiGetMap['contact']['output']>(fetch, `/api/contact/contact-${payload.id}`, { method: 'GET' }),
 
         submit: (fetch: FetchLike, payload: ApiSubmitMap['contact']['input']) =>
         api<ApiSubmitMap['contact']['output']>(fetch, '/api/contact', {

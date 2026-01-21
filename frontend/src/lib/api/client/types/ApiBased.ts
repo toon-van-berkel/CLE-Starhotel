@@ -4,7 +4,7 @@ import type {
     // Rooms
     RoomsListResponse, 
     RoomRecordResponse, 
-
+    
     // Tickets (Contacts)
     ContactListResponse, 
     ContactRecordResponse,
@@ -15,7 +15,7 @@ import type {
 export type ApiGetMap = {
     rooms: { output: RoomsListResponse };
     room: { input: { id: number }; output: RoomRecordResponse };
-
+    
   contacts: { output: ContactListResponse };
   contact: { input: { id: number }; output: ContactRecordResponse };
 };
