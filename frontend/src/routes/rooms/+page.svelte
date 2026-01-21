@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { RoomsListResponse } from '$lib/api/types/room';
+    import type { RoomsListResponse } from '$lib/api/client/apiTypes';
 
     export let data: { roomsData: RoomsListResponse };
     const { roomsData } = data;
