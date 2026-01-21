@@ -24,7 +24,7 @@
                 <p class="room-description">Room description goes here!</p>
             </article>
             <div class="room-data">
-                <a href={`rooms/${room.id}`} data-sveltekit-reload>Bekijk kamer</a>
+                <a href={`rooms/room-${room.id}`} data-sveltekit-reload>Bekijk kamer</a>
                 <p><small>Max: {room.max_capacity}</small></p>
             </div>
             
