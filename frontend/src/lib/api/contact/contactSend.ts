@@ -3,6 +3,7 @@ import { api } from "$lib/api/client/apiBase";
 export type ContactPayload = {
   //data die wordt verstuurd naar de backend
   name: string;
+  email: string;
 };
 
 export type ContactResponse = {
@@ -11,7 +12,7 @@ export type ContactResponse = {
 };
 
 export function sendContact(payload: ContactPayload) {
-  return api<ContactResponse>(fetch, "/contact", {
+  return api<ContactResponse>(fetch, "/api/contact", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

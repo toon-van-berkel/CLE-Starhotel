@@ -10,10 +10,6 @@ try {
 
     $name = trim((string) ($body['name'] ?? ''));
     $email = trim((string) ($body['email'] ?? ''));
-    $reason = trim((string) ($body['reason'] ?? ''));
-    $title = trim((string) ($body['title'] ?? ''));
-    $message = trim((string) ($body['message'] ?? ''));
-    $created_at = date('Y-m-d H:i:s');
 
     if ($name === '') {
         json_error('Missing required field: name', 400);
@@ -24,31 +20,15 @@ try {
         json_error('Missing required field: email', 400);
         exit;
     }
-    if ($reason === '') {
-        json_error('Missing required field: reason', 400);
-        exit;
-    }
-    if ($title === '') {
-        json_error('Missing required field: title', 400);
-        exit;
-    }
-    if ($message === '') {
-        json_error('Missing required field: message', 400);
-        exit;
-    }
 
     $stmt = $pdo->prepare("
-        INSERT INTO contact (name , email , reason, title , message, created_at)
-        VALUES (:name, :email, :reason, :title, :message, :created_at)
+        INSERT INTO contact (name , email)
+        VALUES (:name, :email)
     ");
 
     $stmt->execute([
         ':name' => $name,
-        ':email' => $email,
-        ':reason' => $reason,
-        ':title' => $title,
-        ':message' => $message,
-        ':created_at' => $created_at,
+        ':email' => $email
     ]);
 
     json_ok([
