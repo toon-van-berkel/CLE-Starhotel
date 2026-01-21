@@ -5,6 +5,7 @@ export type ContactPayload = {
   name: string;
   email: string;
   reason: string;
+  title: string;
 };
 
 export type ContactResponse = {
