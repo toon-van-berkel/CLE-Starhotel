@@ -6,12 +6,3 @@ export type Room = {
     location: string,
     number: number
 };
-
-export type RoomsListResponse = {
-    records: Room[];
-    error?: string;
-};
-export type RoomRecordResponse = {
-    record: Room | null;
-    error?: string;
-};

@@ -3,6 +3,7 @@
         <div class="flex">
             <li><a class="bg-primary" href="/">SH</a></li>
             <li><a class="navinfo" href="/">Starhotel</a></li>
+            <li><a class="bg-primary :hover" href="/">home</a></li>
             
         </div>
         <div class="flex">
