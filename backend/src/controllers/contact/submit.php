@@ -11,6 +11,8 @@ try {
     $name = trim((string) ($body['name'] ?? ''));
     $email = trim((string) ($body['email'] ?? ''));
     $reason = trim((string) ($body['reason'] ?? ''));
+    $title = trim((string) ($body['title'] ?? ''));
+
 
 
 
@@ -27,17 +29,22 @@ try {
         json_error('Missing required field: reason', 400);
         exit;
     }
+    if ($title === '') {
+        json_error('Missing required field: title', 400);
+        exit;
+    }
 
 
     $stmt = $pdo->prepare("
-        INSERT INTO contact (name , email , reason)
-        VALUES (:name, :email, :reason)
+        INSERT INTO contact (name , email , reason, title)
+        VALUES (:name, :email, :reason, :title)
     ");
 
     $stmt->execute([
         ':name' => $name,
         ':email' => $email,
         ':reason' => $reason,
+        ':title' => $title,
     ]);
 
     json_ok([
