@@ -9,23 +9,28 @@ session_start();
 
 header('Content-Type: application/json; charset=utf-8');
 
-$loggedin = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+function loginCheck() {
 
-if (!$loggedin) {
+    $loggedin = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+
+    if (!$loggedin) {
     header('Location: /rooms');
     exit();
+    }
 }
 
+function upload() {
+    $input = json_decode(file_get_contents('php://input'), true);
 
-$input = json_decode(file_get_contents('php://input'), true);
-
-if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) {
     
     $first_name  = htmlentities($_POST['first_name']);
     $last_name   = htmlentities($_POST['last_name']);
     $email       = htmlentities($_POST['email']);
     $booked_from = htmlentities($_POST['booked_from']);
     $booked_till = htmlentities($_POST['booked_till']);
+    $current_capacity      = htmlentities($_POST['current_capacity']);
+    $max_capacity      = htmlentities($_POST['max_capacity']);
 
     $errors = [];
 
@@ -49,13 +54,23 @@ if (isset($_POST['submit'])) {
         $errors['booking'] = "Check-out date must be after check-in date";
     }
 
+    if ($max_capacity === "" || !ctype_digit($max_capacity) || (int)$max_capacity < 1) {
+        $errors['max_capacity'] = "Invalid max capacity";
+    }
+
+    if ($current_capacity === "" || !ctype_digit($current_capacity) || (int)$current_capacity < 1) {
+        $errors['current_capacity'] = "Invalid number of people";
+    } elseif (ctype_digit($max_capacity) && (int)$current_capacity > (int)$max_capacity) {
+        $errors['current_capacity'] = "Number of people exceeds max capacity";
+    }
+
     if (!empty($errors)) {
         echo json_encode(['errors' => $errors]);
         exit();
     }
     
+    }
 }
-
     
 
 

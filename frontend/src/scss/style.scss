@@ -156,4 +156,13 @@ button {
 }
 
     
-  
+.buttonCenter {
+    display: block;
+    margin: 1.5em auto 10%;
+    padding: 3% 10%;
+}
+
+
+input.invalid {
+        border-color: #B42318 !important;
+    }

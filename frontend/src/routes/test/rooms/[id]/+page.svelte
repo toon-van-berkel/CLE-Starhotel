@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { RoomRecordResponse } from '$lib/api/types/room';
+    import type { RoomRecordResponse } from '$lib/api/client/apiTypes';
     export let data: { roomData: RoomRecordResponse };
 </script>
 
