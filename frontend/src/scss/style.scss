@@ -1,3 +1,7 @@
+@import "./details.scss";
+@import "./room.scss";
+@import "./var";
+
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +23,12 @@ nav, footer, main {
 
 main {
     padding: 25px 30px;
+}
+
+main {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 50px 0 50px;
 }
 
 .bg-primary {
