@@ -258,7 +258,9 @@
 }
 
 main {
+  max-width: 1500px;
   margin: 0 auto;
+  padding: 0 50px 0 50px;
 }
 
 .bg-primary {
