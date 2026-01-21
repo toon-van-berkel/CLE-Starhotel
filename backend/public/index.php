@@ -33,8 +33,23 @@ if ($method === 'GET' && $uri === '/api/me') {
   exit;
 }
 
+// Reservation
 if ($method === 'GET' && $uri === '/api/confirm') {
   require __DIR__ . '/../src/controllers/confirm/confirmation.php';
+  exit;
+}
+// Contact
+if ($method === 'GET' && $uri === '/api/contact') {
+  require __DIR__ . '/../src/controllers/contact/index.php';
+  exit;
+}
+if ($method === 'GET' && preg_match('#^/api/contact/contact-(\d+)/?$#', $uri, $matches)) {
+  $_GET['id'] = (int) $matches[1];
+  require __DIR__ . '/../src/controllers/contact/detail.php';
+  exit;
+}
+if ($method === 'POST' && $uri === '/api/contact') {
+  require __DIR__ . '/../src/controllers/contact/submit.php';
   exit;
 }
 
