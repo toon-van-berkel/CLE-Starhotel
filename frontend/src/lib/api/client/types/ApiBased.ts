@@ -1,44 +1,56 @@
-import type { Room } from '$lib/api/types/room';
-import type { ContactInput } from '$lib/api/types/contact';
-import type { RegisterInput, LoginInput } from '$lib/api/types/auth';
+import type { Room } from "$lib/api/types/room";
+import type { ContactInput } from "$lib/api/types/contact";
+import type { RegisterInput, LoginInput } from "$lib/api/types/auth";
 
 import type {
-	// Rooms
-	RoomsListResponse,
-	RoomRecordResponse,
+  // Rooms
+  RoomsListResponse,
+  RoomRecordResponse,
 
-	// Tickets (Contacts)
-	ContactListResponse,
-	ContactRecordResponse,
-	ContactResponse,
+  // Tickets (Contacts)
+  ContactListResponse,
+  ContactRecordResponse,
+  ContactResponse,
 
-	// Auth
-	MeResponse,
-	LoginResponse,
-	RegisterResponse,
-	LogoutResponse
-} from '$lib/api/client/types/ApiResponse';
+  // Auth
+  MeResponse,
+  LoginResponse,
+  RegisterResponse,
+  LogoutResponse,
+} from "$lib/api/client/types/ApiResponse";
 
 // GET
 export type ApiGetMap = {
-	rooms: { output: RoomsListResponse };
-	room: { input: { id: number }; output: RoomRecordResponse };
+  rooms: { output: RoomsListResponse };
+  room: { input: { id: number }; output: RoomRecordResponse };
 
-	contacts: { output: ContactListResponse };
-	contact: { input: { id: number }; output: ContactRecordResponse };
+  contacts: { output: ContactListResponse };
+  contact: { input: { id: number }; output: ContactRecordResponse };
 
-	me: { output: MeResponse };
+  me: { output: MeResponse };
 };
 
 // POST
 export type ApiSubmitMap = {
-	room: { input: Room; output: Room };
-	contact: { input: ContactInput; output: ContactResponse };
+  room: { input: Room; output: Room };
+  contact: { input: ContactInput; output: ContactResponse };
 
-	register: { input: RegisterInput; output: RegisterResponse };
-	login: { input: LoginInput; output: LoginResponse };
-	logout: { input: Record<string, never>; output: LogoutResponse };
+  login: { input: { email: string; password: string }; output: LoginResponse };
+  register: {
+    input: {
+      first_name: string;
+      last_name: string;
+      email: string;
+      phone: string;
+      password: string;
+    };
+    output: RegisterResponse;
+  };
+  logout: { input: {}; output: LogoutResponse };
 };
 
 // FETCH
-export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+export type FetchLike = (
+  input: RequestInfo | URL,
+  init?: RequestInit
+) => Promise<Response>;

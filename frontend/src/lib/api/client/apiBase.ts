@@ -4,7 +4,6 @@ import type { FetchLike } from "$lib/api/client/apiTypes";
 export async function api<T>(
   fetchFn: FetchLike,
   path: string,
-
   init: RequestInit = {}
 ): Promise<T> {
   console.log(`${PUBLIC_API_BASE}${path}`);
