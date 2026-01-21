@@ -6,6 +6,6 @@
 </script>
 
 {#each roomsData.records as room}
-    <div>Room {room.number} <a href="rooms/room-{room.id}">Room {room.id}</a> </div>
+    <div>Room {room.number} <a href="/rooms/room-{room.id}">Room {room.id}</a> </div>
 {/each}
  

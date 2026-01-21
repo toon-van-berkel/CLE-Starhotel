@@ -4,3 +4,5 @@ export const load = async ({ fetch }) => {
     const roomsData = await apiCall('rooms', fetch);
     return { roomsData };
 };
+
+
