@@ -1,14 +1,11 @@
-import type {Room, RoomRecordResponse, RoomsListResponse} from '$lib/api/types/room';
+export type {ApiGetMap, ApiSubmitMap, FetchLike} from '$lib/api/client/types/ApiBased';
+export type {
+    // Rooms
+    RoomsListResponse, 
+    RoomRecordResponse,
 
-// Getting map
-export type ApiGetMap = {
-    rooms: { output: RoomsListResponse };
-    room: { input: { id: number }; output: RoomRecordResponse };
-};
-
-// Submit
-export type ApiSubmitMap = {
-    room: { input: Room; output: Room };
-};
-
-export type FetchLike = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
+    // Tickets (Contacts)
+    ContactListResponse, 
+    ContactRecordResponse, 
+    ContactResponse,
+} from '$lib/api/client/types/ApiResponse';

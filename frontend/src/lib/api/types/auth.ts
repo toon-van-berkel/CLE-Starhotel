@@ -1,7 +1,12 @@
-// import type {User} from '$lib/api/types/__index__';
+export type RegisterInput = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string;
+  password: string;
+};
 
-// export type AuthState = {
-//     user: User | null;
-//     loading: boolean;
-//     initialized: boolean;
-// };
+export type LoginInput = {
+  email: string;
+  password: string;
+};
