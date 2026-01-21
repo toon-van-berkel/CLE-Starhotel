@@ -13,6 +13,7 @@ try {
     $reason = trim((string) ($body['reason'] ?? ''));
     $title = trim((string) ($body['title'] ?? ''));
     $message = trim((string) ($body['message'] ?? ''));
+    $created_at = date('Y-m-d H:i:s');
 
 
 
@@ -40,9 +41,10 @@ try {
     }
 
 
+
     $stmt = $pdo->prepare("
-        INSERT INTO contact (name , email , reason, title , message)
-        VALUES (:name, :email, :reason, :title, :message)
+        INSERT INTO contact (name , email , reason, title , message, created_at)
+        VALUES (:name, :email, :reason, :title, :message, :created_at)
     ");
 
     $stmt->execute([
@@ -51,6 +53,7 @@ try {
         ':reason' => $reason,
         ':title' => $title,
         ':message' => $message,
+        ':created_at' => $created_at,
     ]);
 
     json_ok([
