@@ -22,12 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode($json, true);
 
     if (!empty($data['name']) && !empty($data['email']) && !empty($data['reason']) && !empty($data['title']) && !empty($data['message'])) {
-        // We voegen alleen de velden in die je in je formulier hebt.
-        // status_id krijgt hier standaard 1 (bijv. voor 'nieuw').
-        // De overige velden (user_id, admin_handled_id) laten we op NULL staan.
 
-        $sql = "INSERT INTO contact (name, email, reason, title, message, status_id) 
-                VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO contact (name, email, reason, title, message, created_at, status_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $pdo->prepare($sql);
 
@@ -38,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $data['reason'],
                 $data['title'],
                 $data['message'],
+                $data['created_at'],
                 1 // Standaard status_id
             ]);
 

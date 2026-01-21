@@ -1,7 +1,15 @@
 <script lang="ts">
+  import "../../scss/_contact.scss";
+
   import { sendContact } from "$lib/api/contact/contactSend";
 
-  let form = { name: "", email: "", reason: "", title: "", message: "" };
+  let form = {
+    name: "",
+    email: "",
+    reason: "",
+    title: "",
+    message: "",
+  };
   let fieldErrors: Record<string, string> = {};
   let result: { ok: true; id?: number } | null = null;
 
@@ -22,6 +30,7 @@
         reason: form.reason,
         title: form.title,
         message: form.message,
+        created_at: new Date().toISOString(),
       });
       console.log("Submission result:", result);
     } catch (error) {
@@ -47,6 +56,7 @@
 </div>
 <input type="text" bind:value={form.title} placeholder="Title" />
 
+<!-- svelte-ignore element_invalid_self_closing_tag -->
 <textarea bind:value={form.message} placeholder="Message" />
 
 <input type="button" value="submit" onclick={onSubmit} />
