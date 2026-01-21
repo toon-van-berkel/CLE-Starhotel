@@ -138,6 +138,7 @@ button:hover {
 .text-field-input input {
   padding: 10px;
   border-radius: 5px;
+  border: 2px solid black;
 }
 
 .buttonCenter {
@@ -148,4 +149,10 @@ button:hover {
 
 input.invalid {
   border-color: #B42318 !important;
+}
+
+.error {
+  color: #B42318;
+  font-size: 0.85rem;
+  min-height: 1.1rem;
 }/*# sourceMappingURL=style.css.map */

@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "cross-env NODE_OPTIONS=--use-system-ca vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
@@ -15,6 +15,7 @@
 		"@sveltejs/adapter-auto": "^7.0.0",
 		"@sveltejs/kit": "^2.49.1",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
+		"cross-env": "^10.1.0",
 		"sass-embedded": "^1.97.2",
 		"svelte": "^5.45.6",
 		"svelte-check": "^4.3.4",

@@ -152,6 +152,7 @@ button {
     & input {
         padding: 10px;
         border-radius: 5px;
+        border: 2px solid black;
     }
 }
 
@@ -166,3 +167,8 @@ button {
 input.invalid {
         border-color: #B42318 !important;
     }
+.error {
+        color: #B42318;
+        font-size: 0.85rem;
+        min-height: 1.1rem;
+}

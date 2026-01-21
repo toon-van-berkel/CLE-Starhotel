@@ -20,6 +20,13 @@ function loginCheck() {
 }
 
 function upload() {
+
+$user_id = $_SESSION['user_id'] ?? null;
+    if (!$user_id) {
+        echo json_encode(['error' => 'Not authenticated']);
+        exit();
+    }
+
     $input = json_decode(file_get_contents('php://input'), true);
 
     if (isset($_POST['submit'])) {
@@ -76,7 +83,7 @@ function upload() {
 
 try {
 
-    $user_id = $_SESSION['user_id'];
+    // $user_id = $_SESSION['user_id'];
 
     $pdoget = db();
 
@@ -111,6 +118,8 @@ try {
     
 
 } catch (PDOException $e) {
-    $pdoadd->rollBack();
+    if (isset($pdoadd)) {
+        $pdoadd->rollBack();
+    }
     echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
 }
