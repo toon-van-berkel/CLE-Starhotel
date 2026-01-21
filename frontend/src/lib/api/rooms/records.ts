@@ -11,7 +11,7 @@
 //     return api<RoomsResponse>('/rooms', { method: 'GET' });
 // }
 
-import type { Room } from '$lib/api/types/__index__';
+import type { Room } from '$lib/api/types/room';
 import { PUBLIC_API_BASE } from '$env/static/public';
 
 export type RoomDetailResponse = {
