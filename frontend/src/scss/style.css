@@ -52,6 +52,11 @@ nav ul {
   gap: 50px;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 nav {
   padding: 20px 30px;
 }
@@ -106,4 +111,31 @@ nav {
 
 .margin {
   margin-bottom: 5%;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.text-field-input {
+  padding: 15px;
+}
+.text-field-input input {
+  padding: 10px;
+  border-radius: 5px;
 }/*# sourceMappingURL=style.css.map */

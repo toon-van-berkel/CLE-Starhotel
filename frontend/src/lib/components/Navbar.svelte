@@ -9,6 +9,7 @@
             <li><a class="navinfo" href="/about">About</a></li>
             <li><a class="navinfo" href="/rooms">Rooms</a></li>
             <li><a class="navinfo" href="/reservation-confirmation">Confirmation</a></li>
+            <li><a class="navinfo" href="/reservation">Reserveren</a></li>
         </div>
     </ul>
 </nav>
