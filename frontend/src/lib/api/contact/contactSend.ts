@@ -4,6 +4,7 @@ export type ContactPayload = {
   //data die wordt verstuurd naar de backend
   name: string;
   email: string;
+  reason: string;
 };
 
 export type ContactResponse = {
