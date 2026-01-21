@@ -1,7 +1,7 @@
 <script lang="ts">
   import { sendContact } from "$lib/api/contact/contactSend";
 
-  let form = { name: "", email: "", reason: "", title: "" };
+  let form = { name: "", email: "", reason: "", title: "", message: "" };
   let fieldErrors: Record<string, string> = {};
   let result: { ok: true; id?: number } | null = null;
 
@@ -21,6 +21,7 @@
         email: form.email,
         reason: form.reason,
         title: form.title,
+        message: form.message,
       });
       console.log("Submission result:", result);
     } catch (error) {
@@ -45,5 +46,7 @@
   {#if fieldErrors.reason}<div class="err">{fieldErrors.reason}</div>{/if}
 </div>
 <input type="text" bind:value={form.title} placeholder="Title" />
+
+<textarea bind:value={form.message} placeholder="Message" />
 
 <input type="button" value="submit" onclick={onSubmit} />

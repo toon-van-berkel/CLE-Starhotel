@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $json = file_get_contents('php://input');
     $data = json_decode($json, true);
 
-    if (!empty($data['name']) && !empty($data['email']) && !empty($data['reason']) && !empty($data['title'])) {
+    if (!empty($data['name']) && !empty($data['email']) && !empty($data['reason']) && !empty($data['title']) && !empty($data['message'])) {
         // We voegen alleen de velden in die je in je formulier hebt.
         // status_id krijgt hier standaard 1 (bijv. voor 'nieuw').
         // De overige velden (user_id, admin_handled_id) laten we op NULL staan.

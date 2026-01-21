@@ -6,6 +6,7 @@ export type ContactPayload = {
   email: string;
   reason: string;
   title: string;
+  message: string;
 };
 
 export type ContactResponse = {
