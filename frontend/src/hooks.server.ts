@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import { API_BASE } from '$env/static/private';
+import { PUBLIC_API_BASE } from '$env/static/public';
 
 const HOP_BY_HOP = new Set([
     'connection',
@@ -23,27 +23,30 @@ function forwardHeaders(request: Request) {
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
-    const { url, request, fetch } = event;
+	const { url, request, isDataRequest } = event;
 
-    // Only proxy /api/*
-    if (url.pathname.startsWith('/api/')) {
-        const upstreamUrl = `${API_BASE}${url.pathname}${url.search}`;
+	// ⛔ SSR mag NIET door de proxy
+	if (url.pathname.startsWith('/api/') && !event.route?.id) {
+		const upstreamUrl = `${PUBLIC_API_BASE}${url.pathname}${url.search}`;
 
-        const upstreamRes = await fetch(upstreamUrl, {
-        method: request.method,
-        headers: forwardHeaders(request),
-        body: ['GET', 'HEAD'].includes(request.method)
-            ? undefined
-            : await request.arrayBuffer()
-        });
+		const headers = forwardHeaders(request);
+		const cookie = request.headers.get('cookie');
+		if (cookie) headers.set('cookie', cookie);
 
-        // Return upstream response (streamed), keep status + headers
-        return new Response(upstreamRes.body, {
-        status: upstreamRes.status,
-        headers: upstreamRes.headers
-        });
-    }
+		const upstreamRes = await globalThis.fetch(upstreamUrl, {
+			method: request.method,
+			headers,
+			body: ['GET', 'HEAD'].includes(request.method)
+				? undefined
+				: await request.arrayBuffer()
+		});
 
-    // All non-API requests behave normally
-    return resolve(event);
+		return new Response(upstreamRes.body, {
+			status: upstreamRes.status,
+			headers: upstreamRes.headers
+		});
+	}
+
+	return resolve(event);
 };
+
