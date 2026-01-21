@@ -3,6 +3,8 @@
 
     export let data: { roomsData: RoomsListResponse };
     const { roomsData } = data;
+
+
 </script>
 
 <!-- {#each roomsData.records as room}
@@ -18,7 +20,7 @@
         <div class="popular">Popular</div>
         <img class="room-image" src="" alt="Room {room.id} image">
         <div class="room-body">
-            <h2>Deluxe Room</h2>
+            <h2>Room: {room.number}</h2>
             <article>
                 <p class=room-pricing><bold>&euro;149,99</bold> <small>Per night.</small></p>
                 <p class="room-description">Room description goes here!</p>

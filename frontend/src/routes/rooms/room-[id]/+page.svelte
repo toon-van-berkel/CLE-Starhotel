@@ -1,18 +1,33 @@
 <script lang="ts">
     import type { RoomRecordResponse } from '$lib/api/client/apiTypes';
+        import images from "$lib/imageData/imageData.json";
     export let data: { roomData: RoomRecordResponse };
+
+        let currentIndex = 0;
+
+    function nextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    function prevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+    }
+
+    /** @param {number} index */
+    function selectImage(index) {
+        currentIndex = index;
+    }
+
 </script>
 
 {#if data.roomData.record}
-    <div>Room {data.roomData.record.number}</div>
-    <div>Testing: {data.roomData.record.location}</div>
-{:else}
-    <div>Room not found</div>
-{/if}
+    <!-- <div>Room {data.roomData.record.number}</div>
+    <div>Testing: {data.roomData.record.location}</div> -->
+
 
 <div class="details-container">
   <div class="details-intro">
-    <h1 class="details-header">Deluxe Room</h1>
+    <h1 class="details-header">Room {data.roomData.record.number}</h1>
     <p>
       De Deluxe Room biedt een comfortabel en luxueus verblijf met een
       uitstekende uitzicht op de stad of het landschap.
@@ -99,4 +114,8 @@
     </div>
   </div>
 </div>
+
+{:else}
+    <div>Room not found</div>
+{/if}
 
