@@ -1,6 +1,7 @@
 <script lang="ts">
   import { apiSubmit } from "$lib/api/client/__index__";
-  import type { ContactInput, ContactResponse } from "$lib/api/types/contact";
+  import type { ContactInput } from "$lib/api/types/contact";
+  import type { ContactResponse } from "$lib/api/client/apiTypes";
 
   let form: ContactInput = {
     name: "",
