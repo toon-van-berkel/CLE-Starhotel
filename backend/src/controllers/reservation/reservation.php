@@ -21,11 +21,13 @@ function loginCheck() {
 
 function upload() {
 
-$user_id = $_SESSION['user_id'] ?? null;
-    if (!$user_id) {
-        echo json_encode(['error' => 'Not authenticated']);
-        exit();
-    }
+// $user_id = $_SESSION['user_id'] ?? null;
+//     if (!$user_id) {
+//         echo json_encode(['error' => 'Not authenticated']);
+//         exit();
+//     }
+
+    $user_id = 1;
 
     $input = json_decode(file_get_contents('php://input'), true);
 
@@ -75,6 +77,34 @@ $user_id = $_SESSION['user_id'] ?? null;
         echo json_encode(['errors' => $errors]);
         exit();
     }
+
+        $pdoadd = db();
+
+        $stmtUser = $pdoadd->prepare('
+            UPDATE `users`
+            SET `first_name` = :first_name,
+                `last_name`  = :last_name,
+                `email`      = :email
+            WHERE `id` = :user_id
+        ');
+        $stmtUser->execute([
+            ':first_name' => $first_name,
+            ':last_name'  => $last_name,
+            ':email'      => $email,
+            ':user_id'    => $user_id
+        ]);
+
+        $stmtadd = $pdoadd->prepare('
+            INSERT INTO `reservations`(`user_id`, `status_id`, `booked_from`, `booked_till`) 
+            VALUES (:user_id, :status_id, :booked_from, :booked_till)
+        ');
+
+        $stmtadd->execute([
+            ':user_id' => $user_id,
+            ':status_id' => 'pending',
+            ':booked_from' => $booked_from,
+            ':booked_till' => $booked_till
+        ]);
     
     }
 }
@@ -122,4 +152,51 @@ try {
         $pdoadd->rollBack();
     }
     echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+}
+
+
+
+
+function uploadTest () {
+
+    $user_id = 1;
+
+    $first_name  = htmlentities($_POST['first_name']);
+    $last_name   = htmlentities($_POST['last_name']);
+    $email       = htmlentities($_POST['email']);
+    $booked_from = htmlentities($_POST['booked_from']);
+    $booked_till = htmlentities($_POST['booked_till']);
+    $current_capacity      = htmlentities($_POST['current_capacity']);
+    
+    
+    
+    $pdoadd = db();
+
+        $stmtUser = $pdoadd->prepare('
+            UPDATE `users`
+            SET `first_name` = :first_name,
+                `last_name`  = :last_name,
+                `email`      = :email
+            WHERE `id` = :user_id
+        ');
+        $stmtUser->execute([
+            ':first_name' => $first_name,
+            ':last_name'  => $last_name,
+            ':email'      => $email,
+            ':user_id'    => $user_id
+        ]);
+
+        $stmtadd = $pdoadd->prepare('
+            INSERT INTO `reservations`(`user_id`, `status_id`, `booked_from`, `booked_till`) 
+            VALUES (:user_id, :status_id, :booked_from, :booked_till)
+        ');
+
+        $stmtadd->execute([
+            ':user_id' => $user_id,
+            ':status_id' => 'pending',
+            ':booked_from' => $booked_from,
+            ':booked_till' => $booked_till
+        ]);
+    
+    
 }

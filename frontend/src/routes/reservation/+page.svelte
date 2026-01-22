@@ -1,17 +1,20 @@
 <script lang="ts">
     import type {getUserInfoReservation} from '$lib/api/reservation/reservation';
-    import type {upload} from '$lib/api/reservation/reservation';
+    import {upload} from '$lib/api/reservation/reservation';
+    import {uploadTest} from '$lib/api/reservation/reservation';
 
     let submitted = false;
+    let max_capacity = 4;
+    
 
     let input = {
         first_name: "",
         last_name: "",
         email: "",
-        booked_from: "",
-        booked_till: "",
-        totalPeople: "",
-        max_capacity: "4",
+        booked_from: 0,
+        booked_till: 0,
+        totalPeople: 0,
+        
     };
 
     let errors = {
@@ -24,6 +27,7 @@
     };
 
     function validateForm(e: Event) {
+        
         e.preventDefault();
         submitted = true;
 
@@ -37,12 +41,12 @@
             ? "Check-out date is required"
             : (input.booked_till <= input.booked_from ? "Check-out must be after check-in" : "");
         errors.totalPeople =
-            !input.totalPeople ? "Number of people is required"
-            : (parseInt(input.totalPeople) < 1 ? "Must be at least 1"
-            : (parseInt(input.totalPeople) > parseInt(input.max_capacity) ? "Exceeds max capacity" : ""));
+            errors.totalPeople =
+    input.totalPeople < 1 ? "Must be at least 1"
+    : (input.totalPeople > max_capacity ? "Exceeds max capacity" : "");
 
         if (!Object.values(errors).some(Boolean)) {
-            // submit logic here (e.g., fetch/POST)
+            uploadTest(input);
         }
     }
 </script>
@@ -83,24 +87,10 @@
 
     <div class="form-group flex-column text-field-input">
         <label for="numberOfPeople">Number of People:</label>
-        <input type="number" id="numberOfPeople" name="numberOfPeople" min="1" max={input.max_capacity} bind:value={input.totalPeople} class:invalid={!!errors.totalPeople}>
+        <input type="number" id="numberOfPeople" name="numberOfPeople"
+       min="1" max={max_capacity} bind:value={input.totalPeople} class:invalid={!!errors.totalPeople}>
         <div class="error">{errors.totalPeople}</div>
     </div>
 
     <button class="buttonCenter" type="submit">Submit Reservation</button>
 </form>
-
-    <style>
-    .buttonCenter {
-        display: block;
-        margin: 1.5rem auto 0;
-    }
-    input.invalid {
-        border-color: #B42318 !important;
-    }
-    .error {
-        color: #B42318;
-        font-size: 0.85rem;
-        min-height: 1.1rem;
-    }
-</style>

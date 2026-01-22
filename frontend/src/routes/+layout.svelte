@@ -20,6 +20,3 @@
 <Navbar></Navbar>
 {@render children()}
 <Footer></Footer>
-<main>
-  {@render children()}
-</main>
