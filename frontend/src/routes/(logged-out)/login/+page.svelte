@@ -12,8 +12,7 @@
 		errorMsg = '';
 
 		try {
-			const res = await apiSubmit('login', fetch, { email, password });
-			// if your backend returns { ok: true, user: ... } this line runs
+			await apiSubmit('login', window.fetch, { email, password });
 			await invalidateAll();
 			await goto('/profile');
 		} catch (err) {

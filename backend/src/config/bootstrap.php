@@ -30,18 +30,16 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
 // ---------- Sessions (cross-site cookie for localhost -> https domain) ----------
 $isHttps =
     (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-    || (($_SERVER['SERVER_PORT'] ?? '') == 443);
-
-$cookieSameSite = $isHttps ? 'None' : 'Lax'; // None requires Secure
-$cookieSecure   = $isHttps;
+    || (($_SERVER['SERVER_PORT'] ?? '') == 443)
+    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
 
 session_name('starhotel_session');
 session_set_cookie_params([
     'lifetime' => 0,
     'path' => '/',
-    'secure' => $cookieSecure,
+    'secure' => true,
     'httponly' => true,
-    'samesite' => $cookieSameSite
+    'samesite' => 'none'
 ]);
 
 if (session_status() !== PHP_SESSION_ACTIVE) {

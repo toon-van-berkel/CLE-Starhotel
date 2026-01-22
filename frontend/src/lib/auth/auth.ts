@@ -11,8 +11,8 @@ export async function loadAuth(parent: ParentFn) {
 		isUserLoggedIn: () => user !== null,
 		isUserLoggedOut: () => user === null,
 
-		// assuming role_id === 1 is admin
-		isUserAdmin: () => user !== null && user.role_ids?.includes(1),
+		// assuming role_id === 1 is developer
+		isUserDeveloper: () => user !== null && user.role_ids?.includes(1),
 
 		isUserStatus: (...allowed: number[]) =>
 			user !== null && user.status_id !== null && allowed.includes(user.status_id)

@@ -1,8 +1,8 @@
 import { writable, get } from 'svelte/store';
+import { browser } from '$app/environment';
 import type { FetchLike } from '$lib/api/client/apiTypes';
 import { apiCall } from '$lib/api/client/apiCall';
 
-// Match what your backend returns from /api/me
 export type AuthUser = {
 	id: number;
 	first_name: string;
@@ -10,11 +10,7 @@ export type AuthUser = {
 	email: string;
 	phone: string;
 	status_id: number | null;
-
-	// IMPORTANT with your DB (many-to-many)
 	role_ids: number[];
-
-	// Add this once backend provides it
 	permission_ids?: number[];
 };
 
@@ -22,41 +18,35 @@ export const meStore = writable<AuthUser | null>(null);
 
 let inFlight: Promise<AuthUser | null> | null = null;
 
-/**
- * Fetch current session user.
- * - returns user on success
- * - returns null on 401/any error
- * - caches in a store
- */
 export async function refreshMe(fetchFn: FetchLike, opts: { force?: boolean } = {}) {
-	if (!opts.force) {
+	if (browser && !opts.force) {
 		const cached = get(meStore);
 		if (cached) return cached;
 		if (inFlight) return inFlight;
 	}
 
-	inFlight = (async () => {
+	const run = (async () => {
 		try {
-			const res = await apiCall('me', fetchFn);
-			// Expecting: { ok: true, user: AuthUser|null } OR { user: AuthUser|null }
-			const user = (res as any).user ?? null;
-			meStore.set(user);
+			const res: any = await apiCall('me', fetchFn);
+			const user = res?.user ?? null;
+
+			if (browser) meStore.set(user);
 			return user as AuthUser | null;
 		} catch {
-			meStore.set(null);
+			if (browser) meStore.set(null);
 			return null;
 		} finally {
-			inFlight = null;
+			if (browser) inFlight = null;
 		}
 	})();
 
-	return inFlight;
+	if (browser) inFlight = run;
+	return run;
 }
 
 export function clearMe() {
-	meStore.set(null);
+	if (browser) meStore.set(null);
 }
-
 
 export function isUserLoggedIn(user: AuthUser | null) {
 	return !!user;

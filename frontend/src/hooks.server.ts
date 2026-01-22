@@ -44,3 +44,6 @@ export const handle: Handle = async ({ event, resolve }) => {
         });
     }
 
+    // All non-API requests behave normally
+    return resolve(event);
+};

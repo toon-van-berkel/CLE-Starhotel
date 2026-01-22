@@ -1,6 +1,5 @@
 import type { Room } from '$lib/api/types/room';
 import type { Contact } from '$lib/api/types/contact';
-import type { User } from '$lib/api/types/user';
 
 // Rooms
 export type RoomsListResponse = {
