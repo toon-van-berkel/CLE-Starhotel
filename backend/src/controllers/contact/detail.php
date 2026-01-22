@@ -11,7 +11,7 @@ try {
     $pdo = db();
 
     $stmt = $pdo->prepare('SELECT * FROM contact WHERE id = :id');
-    $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
+    $stmt->bindValue(':id', (int) $id, PDO::PARAM_INT);
     $stmt->execute();
 
     $record = $stmt->fetch(PDO::FETCH_ASSOC);

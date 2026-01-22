@@ -32,11 +32,12 @@ if ($method === 'GET' && $uri === '/api/me') {
   require __DIR__ . '/../src/controllers/user/me.php';
   exit;
 }
-// Reservation
+
 if ($method === 'GET' && $uri === '/api/confirm') {
   require __DIR__ . '/../src/controllers/confirm/confirmation.php';
   exit;
 }
+
 // Contact
 if ($method === 'GET' && $uri === '/api/contact') {
   require __DIR__ . '/../src/controllers/contact/index.php';
@@ -47,6 +48,12 @@ if ($method === 'GET' && preg_match('#^/api/contact/contact-(\d+)/?$#', $uri, $m
   require __DIR__ . '/../src/controllers/contact/detail.php';
   exit;
 }
+
+if ($method === 'POST' && $uri === '/api/contact') {
+  require __DIR__ . '/../src/controllers/contact/submit.php';
+  exit;
+}
+
 if ($method === 'POST' && $uri === '/api/contact') {
   require __DIR__ . '/../src/controllers/contact/submit.php';
   exit;
