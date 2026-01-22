@@ -35,18 +35,9 @@ export type ApiSubmitMap = {
   room: { input: Room; output: Room };
   contact: { input: ContactInput; output: ContactResponse };
 
-  login: { input: { email: string; password: string }; output: LoginResponse };
-  register: {
-    input: {
-      first_name: string;
-      last_name: string;
-      email: string;
-      phone: string;
-      password: string;
-    };
-    output: RegisterResponse;
-  };
-  logout: { input: {}; output: LogoutResponse };
+  register: { input: RegisterInput; output: RegisterResponse };
+  login: { input: LoginInput; output: LoginResponse };
+  logout: { input: Record<string, never>; output: LogoutResponse };
 };
 
 // FETCH

@@ -1,11 +1,14 @@
 <script lang="ts">
-    import type { RoomsListResponse } from '$lib/api/types/room';
-
-    export let data: { roomsData: RoomsListResponse };
-    const { roomsData } = data;
+  import type { RoomsListResponse } from "$lib/api/client/apiTypes";
+  export let data: { roomsData: RoomsListResponse };
+  const { roomsData } = data;
 </script>
 
+<h1>Test Page</h1>
+<p>This is the base test page.</p>
+
 {#each roomsData.records as room}
-    <div>Room {room.number} <a href="test/{room.id}">Room {room.id}</a> </div>
+  <div>
+    Room {room.number} <a href="/test/rooms/{room.id}">Room {room.id}</a>
+  </div>
 {/each}
- 

@@ -9,12 +9,13 @@ export async function api<T>(
   console.log(`${PUBLIC_API_BASE}${path}`);
   const res = await fetchFn(`${PUBLIC_API_BASE}${path}`, {
     ...init,
+    credentials: "include",
+    cache: "no-store",
     headers: {
       Accept: "application/json",
       ...(init.body ? { "Content-Type": "application/json" } : {}),
       ...(init.headers || {}),
     },
-    credentials: "include",
   });
 
   const data = await res.json().catch(() => ({}));

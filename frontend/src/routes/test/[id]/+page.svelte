@@ -1,11 +1,16 @@
 <script lang="ts">
-    import type { RoomRecordResponse } from '$lib/api/types/room';
-    export let data: { roomData: RoomRecordResponse };
+  import type { ContactRecordResponse } from "$lib/api/client/apiTypes";
+  export let data: { contactData: ContactRecordResponse };
 </script>
 
-{#if data.roomData.record}
-    <div>Room {data.roomData.record.number}</div>
-    <div>Testing: {data.roomData.record.location}</div>
+{#if data.contactData.record}
+  <h1>{data.contactData.record.title}</h1>
+  <p>
+    <b>From:</b>
+    {data.contactData.record.name} ({data.contactData.record.email})
+  </p>
+  <p><b>Reason:</b> {data.contactData.record.reason}</p>
+  <pre>{data.contactData.record.message}</pre>
 {:else}
-    <div>Room not found</div>
+  <p>Not found</p>
 {/if}
