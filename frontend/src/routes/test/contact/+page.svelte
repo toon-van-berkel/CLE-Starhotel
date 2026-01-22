@@ -13,3 +13,5 @@
         <br />
     {/each}
 {/if}
+
+<a href="/test/contact/post">POST</a>
