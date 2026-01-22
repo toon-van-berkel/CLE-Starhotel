@@ -1,10 +1,18 @@
 @import "./details.scss";
+@import "./room.scss";
+@import "./var";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #f8f3ee;
+}
+
+main {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 50px 0 50px;
 }
 
 .bg-primary {
