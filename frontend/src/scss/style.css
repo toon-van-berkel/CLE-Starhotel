@@ -413,4 +413,22 @@ input.invalid {
   color: #B42318;
   font-size: 0.85rem;
   min-height: 1.1rem;
+}
+
+.centerCopyright {
+  justify-content: center;
+  align-items: center;
+}
+
+.footerinfo {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1em;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10px;
+  border: 2px solid white;
+  margin: 20px 40px;
+}
+.footerinfo:hover {
+  border-color: rgba(0, 0, 0, 0.2509803922);
 }/*# sourceMappingURL=style.css.map */
