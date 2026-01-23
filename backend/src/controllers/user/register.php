@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . '/../../config/db.php';
-require_once __DIR__ . '/../../config/error.php';
-const DEFAULT_ROLE_ID = 2; // Set standerd role ID to 2
 
-$body = read_json_body();
+require_once __DIR__ . '/../../config/bootstrap.php';
+require_once __DIR__ . '/../../config/db.php';
+
+const DEFAULT_ROLE_ID = 2; // your "Default" role is id=2 in DB
+
+$body  = read_json_body();
 
 $first = trim((string)($body['first_name'] ?? ''));
 $last  = trim((string)($body['last_name'] ?? ''));
@@ -12,36 +14,55 @@ $email = strtolower(trim((string)($body['email'] ?? '')));
 $phone = trim((string)($body['phone'] ?? ''));
 $pass  = (string)($body['password'] ?? '');
 
-if (strlen($first) < 2) json_error('First name too short');
-if (strlen($last) < 2) json_error('Last name too short');
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) json_error('Invalid email');
-if (strlen($pass) < 8) json_error('Password must be at least 8 characters');
+$fields = [];
+if (strlen($first) < 2) $fields['first_name'] = 'First name too short';
+if (strlen($last) < 2) $fields['last_name'] = 'Last name too short';
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $fields['email'] = 'Invalid email';
+if (strlen($phone) < 6) $fields['phone'] = 'Phone is required';
+if (strlen($pass) < 8) $fields['password'] = 'Password must be at least 8 characters';
+
+if ($fields) json_error('Validation failed', 422, ['fields' => $fields]);
 
 try {
     $pdo = db();
 
-    $check = $pdo->prepare("SELECT id FROM users WHERE email = :email LIMIT 1");
-    $check->execute(['email' => $email]);
-    if ($check->fetch()) json_error('Email already registered', 409);
+    // Email uniqueness
+    $exists = $pdo->prepare("SELECT id FROM users WHERE email = :email LIMIT 1");
+    $exists->execute(['email' => $email]);
+    if ($exists->fetch()) {
+        json_error('Email already in use', 409, ['fields' => ['email' => 'Email already in use']]);
+    }
 
-    $hash = password_hash($pass, PASSWORD_DEFAULT); // Hash password
+    $hash = password_hash($pass, PASSWORD_BCRYPT);
 
-    $stmt = $pdo->prepare("
-        INSERT INTO users (role_id, first_name, last_name, email, phone, password, created_at, last_seen)
-        VALUES (:role_id, :first_name, :last_name, :email, :phone, :password, NOW(), NULL)
+    $pdo->beginTransaction();
+
+    // Insert user (created_at NOT NULL, phone NOT NULL, status_id default 1)
+    $ins = $pdo->prepare("
+        INSERT INTO users (first_name, last_name, email, phone, password, status_id, created_at, last_seen)
+        VALUES (:first, :last, :email, :phone, :pass, 1, NOW(), NOW())
     ");
-
-    $stmt->execute([
-        'role_id' => DEFAULT_ROLE_ID,   // Set role id to 2 which is default
-        'first_name' => $first,         // First name
-        'last_name' => $last,           // Last name
-        'email' => $email,              // email
-        'phone' => $phone,              // empty string if none
-        'password' => $hash             // Hashed password
+    $ins->execute([
+        'first' => $first,
+        'last' => $last,
+        'email' => $email,
+        'phone' => $phone,
+        'pass'  => $hash
     ]);
 
-    json_ok(['ok' => true]);
+    $userId = (int)$pdo->lastInsertId();
+
+    // Assign role in user_has_roles
+    $role = $pdo->prepare("
+        INSERT INTO user_has_roles (user_id, role_id)
+        VALUES (:uid, :rid)
+    ");
+    $role->execute(['uid' => $userId, 'rid' => DEFAULT_ROLE_ID]);
+
+    $pdo->commit();
+
+    json_ok(['ok' => true, 'id' => $userId], 201);
 } catch (Throwable $e) {
-    error_log($e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine()); // Temp error log
+    if (isset($pdo) && $pdo->inTransaction()) $pdo->rollBack();
     json_error('Server error', 500);
 }
