@@ -1,3 +1,6 @@
 docs
 .env
 /storage/logs/app.log
+node_modules
+package-lock.json
+package.json

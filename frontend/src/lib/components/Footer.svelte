@@ -1,9 +1,9 @@
 <hr />
 
 <footer>
-    <div class="flex">
+    <nav class="flex">
             <a class="footerinfo" href="/contact">Contact</a>
-        </div>
+        </nav>
     <p class="lightgraytext centerCopyright">© 2026 Starhotel. All rights reserved.</p>
     
 </footer>

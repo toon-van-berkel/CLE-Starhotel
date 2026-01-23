@@ -3,6 +3,8 @@
     import {upload} from '$lib/api/reservation/reservation';
     import {uploadTest} from '$lib/api/reservation/reservation';
 
+    export let data;
+
     let submitted = false;
     let max_capacity = 4;
     
@@ -46,7 +48,7 @@
     : (input.totalPeople > max_capacity ? "Exceeds max capacity" : "");
 
         if (!Object.values(errors).some(Boolean)) {
-            uploadTest(input);
+            uploadTest(data.fetch, input);
         }
     }
 </script>

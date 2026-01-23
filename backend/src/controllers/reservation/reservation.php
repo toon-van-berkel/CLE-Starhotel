@@ -176,13 +176,11 @@ function uploadTest () {
             UPDATE `users`
             SET `first_name` = :first_name,
                 `last_name`  = :last_name,
-                `email`      = :email
             WHERE `id` = :user_id
         ');
         $stmtUser->execute([
             ':first_name' => $first_name,
             ':last_name'  => $last_name,
-            ':email'      => $email,
             ':user_id'    => $user_id
         ]);
 
