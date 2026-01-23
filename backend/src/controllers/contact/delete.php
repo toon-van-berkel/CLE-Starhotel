@@ -18,6 +18,7 @@ try {
 		$raw = file_get_contents('php://input') ?: '';
 		$body = json_decode($raw, true);
 		if (!is_array($body)) $body = [];
+	}
 
 	$id = isset($body['id']) ? (int)$body['id'] : 0;
 	if ($id <= 0) {
