@@ -23,30 +23,27 @@ function forwardHeaders(request: Request) {
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
-	const { url, request, isDataRequest } = event;
+    const { url, request, fetch } = event;
 
-	// ⛔ SSR mag NIET door de proxy
-	if (url.pathname.startsWith('/api/') && !event.route?.id) {
-		const upstreamUrl = `${PUBLIC_API_BASE}${url.pathname}${url.search}`;
+    // Only proxy /api/*
+    if (url.pathname.startsWith('/api/')) {
+        const upstreamUrl = `${PUBLIC_API_BASE}${url.pathname}${url.search}`;
 
-		const headers = forwardHeaders(request);
-		const cookie = request.headers.get('cookie');
-		if (cookie) headers.set('cookie', cookie);
+        const upstreamRes = await fetch(upstreamUrl, {
+            method: request.method,
+            headers: forwardHeaders(request),
+            body: ['GET', 'HEAD'].includes(request.method)
+                ? undefined
+                : await request.arrayBuffer()
+        });
 
-		const upstreamRes = await globalThis.fetch(upstreamUrl, {
-			method: request.method,
-			headers,
-			body: ['GET', 'HEAD'].includes(request.method)
-				? undefined
-				: await request.arrayBuffer()
-		});
+        // Return upstream response (streamed), keep status + headers
+        return new Response(upstreamRes.body, {
+            status: upstreamRes.status,
+            headers: upstreamRes.headers
+        });
+    }
 
-		return new Response(upstreamRes.body, {
-			status: upstreamRes.status,
-			headers: upstreamRes.headers
-		});
-	}
-
-	return resolve(event);
+    // All non-API requests behave normally
+    return resolve(event);
 };
-
