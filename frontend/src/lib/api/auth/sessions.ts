@@ -1,47 +1,37 @@
 import { writable, get } from 'svelte/store';
 import { browser } from '$app/environment';
 import type { FetchLike } from '$lib/api/client/apiTypes';
+import type {RefreshMeOptions, MeResponseShape, AuthUser} from '$lib/api/types/user';
 import { apiCall } from '$lib/api/client/apiCall';
-
-export type AuthUser = {
-	id: number;
-	first_name: string;
-	last_name: string;
-	email: string;
-	phone: string;
-	status_id: number | null;
-	role_ids: number[];
-	permission_ids?: number[];
-};
 
 export const meStore = writable<AuthUser | null>(null);
 
-let inFlight: Promise<AuthUser | null> | null = null;
+let inFlightRequest: Promise<AuthUser | null> | null = null;
 
-export async function refreshMe(fetchFn: FetchLike, opts: { force?: boolean } = {}) {
-	if (browser && !opts.force) {
-		const cached = get(meStore);
-		if (cached) return cached;
-		if (inFlight) return inFlight;
+export async function refreshMe(fetchFn: FetchLike, options: RefreshMeOptions = {}) {
+	if (browser && !options.force) {
+		const cachedUser = get(meStore);
+		if (cachedUser) return cachedUser;
+		if (inFlightRequest) return inFlightRequest;
 	}
 
-	const run = (async () => {
+	const requestPromise = (async () => {
 		try {
-			const res: any = await apiCall('me', fetchFn);
-			const user = res?.user ?? null;
+			const response = (await apiCall('me', fetchFn)) as MeResponseShape;
+			const user = response?.user ?? null;
 
 			if (browser) meStore.set(user);
-			return user as AuthUser | null;
+			return user;
 		} catch {
 			if (browser) meStore.set(null);
 			return null;
 		} finally {
-			if (browser) inFlight = null;
+			if (browser) inFlightRequest = null;
 		}
 	})();
 
-	if (browser) inFlight = run;
-	return run;
+	if (browser) inFlightRequest = requestPromise;
+	return requestPromise;
 }
 
 export function clearMe() {
@@ -49,22 +39,22 @@ export function clearMe() {
 }
 
 export function isUserLoggedIn(user: AuthUser | null) {
-	return !!user;
+	return user !== null;
 }
 
 export function isUserLoggedOut(user: AuthUser | null) {
-	return !user;
+	return user === null;
 }
 
 // Developer role id = 1 in your DB (roles table)
 export function isUserAdmin(user: AuthUser | null) {
-	return !!user && user.role_ids.includes(1);
+	return user?.role_ids.includes(1) ?? false;
 }
 
 export function isUserStatus(user: AuthUser | null, statusId: number) {
-	return !!user && user.status_id === statusId;
+	return user?.status_id === statusId;
 }
 
-export function hasPermission(user: AuthUser | null, perId: number) {
-	return !!user && Array.isArray(user.permission_ids) && user.permission_ids.includes(perId);
+export function hasPermission(user: AuthUser | null, permissionId: number) {
+	return user?.permission_ids?.includes(permissionId) ?? false;
 }

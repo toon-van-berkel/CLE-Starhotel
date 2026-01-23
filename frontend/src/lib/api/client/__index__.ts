@@ -1,15 +1,19 @@
-export {api} from '$lib/api/client/apiBase';
-export {apiCall} from '$lib/api/client/apiCall';
-export type {EndpointShape} from '$lib/api/client/apiRoute';
-export {endpoints} from '$lib/api/client/apiRoute';
-export {apiSubmit} from '$lib/api/client/apiSubmit';
+export type {SubmitEndpointsShape} from '$lib/api/client/apiSubmit';
+export type {ApiError} from '$lib/api/client/apiBase';
 export type {
-    // API Based
-    ApiGetMap, 
-    ApiSubmitMap, 
-    FetchLike,
+    ApiGetKey,
+    GetOutputForKey,
+    GetInputForKey,
+} from '$lib/api/client/apiCall'
+export type {
+    ApiSubmitKey,
+    ApiEndpointKey,
+    GetFunctionForKey,
+    SubmitFunctionForKey,
+    EndpointShape
+} from '$lib/api/client/apiRoute';
 
-    // API Responses
-    RoomsListResponse,
-    RoomRecordResponse,
-} from '$lib/api/client/apiTypes'
+export {api} from '$lib/api/client/apiBase';
+export {apiCall} from '$lib/api/client/apiCall'
+export {endpoints} from '$lib/api/client/apiRoute';
+export {submitEndpoints, apiSubmit} from '$lib/api/client/apiSubmit';

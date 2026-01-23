@@ -51,6 +51,14 @@ if ($method === 'POST' && $uri === '/api/contact') {
   require __DIR__ . '/../src/controllers/contact/submit.php';
   exit;
 }
+if ($method === 'POST' && $uri === '/api/contact/update') {
+  require __DIR__ . '/../src/controllers/contact/update.php';
+  exit;
+}
+if ($method === 'POST' && $uri === '/api/contact/delete') {
+  require __DIR__ . '/../src/controllers/contact/delete.php';
+  exit;
+}
 
 http_response_code(404);
 echo json_encode(['error' => 'Not found'], JSON_UNESCAPED_UNICODE);

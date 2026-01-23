@@ -1,28 +1,39 @@
 import { PUBLIC_API_BASE } from '$env/static/public';
 import type { FetchLike } from '$lib/api/client/apiTypes';
 
-export async function api<T>(fetchFn: FetchLike, path: string, init: RequestInit = {}): Promise<T> {
-	// console.log(`${PUBLIC_API_BASE}${path}`);
+export type ApiError = Error & {
+	status?: number;
+	data?: unknown;
+};
 
-	const res = await fetchFn(`${PUBLIC_API_BASE}${path}`, {
+export async function api<ResponseData>(
+	fetchFn: FetchLike,
+	path: string,
+	init: RequestInit = {}
+): Promise<ResponseData> {
+	const response = await fetchFn(`${PUBLIC_API_BASE}${path}`, {
 		...init,
 		credentials: 'include',
 		cache: 'no-store',
 		headers: {
 			Accept: 'application/json',
 			...(init.body ? { 'Content-Type': 'application/json' } : {}),
-			...(init.headers || {})
+			...(init.headers ?? {})
 		}
 	});
 
-	const data = await res.json().catch(() => ({}));
+	const jsonData: unknown = await response.json().catch(() => ({}));
 
-	if (!res.ok) {
-		const err: any = new Error((data as any)?.error || `Request failed (${res.status})`);
-		err.status = res.status;
-		err.data = data;
-		throw err;
+	if (!response.ok) {
+		const error = new Error(
+			(jsonData as any)?.error || `Request failed (${response.status})`
+		) as ApiError;
+
+		error.status = response.status;
+		error.data = jsonData;
+
+		throw error;
 	}
 
-	return data as T;
+	return jsonData as ResponseData;
 }

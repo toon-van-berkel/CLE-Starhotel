@@ -1,7 +1,7 @@
-import type { Room } from '$lib/api/types/room';
-import type { ContactInput } from '$lib/api/types/contact';
-import type { RegisterInput, LoginInput } from '$lib/api/types/auth';
-
+/* ------------------------------------------
+ *               Type imports
+ * ------------------------------------------ */
+// Responses
 import type {
 	// Rooms
 	RoomsListResponse,
@@ -16,31 +16,60 @@ import type {
 	MeResponse,
 	LoginResponse,
 	RegisterResponse,
-	LogoutResponse
+	LogoutResponse,
+
+	// Contact
+	ContactUpdateResponse,
+	ContactDeleteResponse
 } from '$lib/api/client/types/ApiResponse';
 
+// Inputs + Submits
+import type {
+	ContactInput,
+	ContactDeleteInput,
+	ContactUpdateInput
+} from '$lib/api/types/contact';
+import type {
+	LoginInput,
+	RegisterInput
+} from '$lib/api/types/auth';
+
+// Base
+import type {Room} from '$lib/api/types/room';
+
+// Other
+import type {
+	Get, GetById, Submit
+} from '$lib/api/client/types/ApiOther';
+
+/* ------------------------------------------
+ *              Endpoint maps
+ * ------------------------------------------ */
 // GET
 export type ApiGetMap = {
-	rooms: { output: RoomsListResponse };
-	room: { input: { id: number }; output: RoomRecordResponse };
+	rooms: Get<RoomsListResponse>;
+	room: GetById<RoomRecordResponse>;
 
-	contacts: { output: ContactListResponse };
-	contact: { input: { id: number }; output: ContactRecordResponse };
+	contacts: Get<ContactListResponse>;
+	contact: GetById<ContactRecordResponse>;
 
-	me: { output: MeResponse };
+	me: Get<MeResponse>;
 };
 
 // POST
 export type ApiSubmitMap = {
-	room: { input: Room; output: Room };
-	contact: { input: ContactInput; output: ContactResponse };
+	// Rooms
+	room: Submit<Room, Room>;
 
-	login: { input: { email: string; password: string }; output: LoginResponse };
-	register: {
-		input: { first_name: string; last_name: string; email: string; phone: string; password: string };
-		output: RegisterResponse;
-	};
-	logout: { input: {}; output: LogoutResponse };
+	// Contact
+	contact: Submit<ContactInput, ContactResponse>;
+	contactUpdate: Submit<ContactUpdateInput, ContactUpdateResponse>;
+	contactDelete: Submit<ContactDeleteInput, ContactDeleteResponse>;
+
+	// User
+	login: Submit<LoginInput, LoginResponse>;
+	register: Submit<RegisterInput, RegisterResponse>;
+	logout: Submit<{}, LogoutResponse>;
 };
 
 // FETCH

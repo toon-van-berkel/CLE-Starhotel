@@ -1,18 +1,23 @@
 import { endpoints } from '$lib/api/client/apiRoute';
 import type { FetchLike, ApiSubmitMap } from '$lib/api/client/apiTypes';
 
-type SubmitEndpoints = {
-    [K in keyof ApiSubmitMap]: {
-        submit: (fetch:FetchLike, payload: ApiSubmitMap[K]['input']) => Promise<ApiSubmitMap[K]['output']>;
-    };
+export type ApiSubmitKey = keyof ApiSubmitMap;
+
+export type SubmitInputForKey<Key extends ApiSubmitKey> = ApiSubmitMap[Key]['input'];
+export type SubmitOutputForKey<Key extends ApiSubmitKey> = ApiSubmitMap[Key]['output'];
+
+export type SubmitEndpointsShape = {
+	[Key in ApiSubmitKey]: {
+		submit: (fetch: FetchLike, payload: SubmitInputForKey<Key>) => Promise<SubmitOutputForKey<Key>>;
+	};
 };
 
-const submitEndpoints = endpoints as unknown as SubmitEndpoints;
+export const submitEndpoints = endpoints as unknown as SubmitEndpointsShape;
 
-export function apiSubmit<K extends keyof ApiSubmitMap>(
-    key: K,
-    fetch:FetchLike,
-    payload: ApiSubmitMap[K]['input']
-): Promise<ApiSubmitMap[K]['output']> {
-    return submitEndpoints[key].submit(fetch, payload);
+export function apiSubmit<Key extends ApiSubmitKey>(
+	key: Key,
+	fetch: FetchLike,
+	payload: SubmitInputForKey<Key>
+): Promise<SubmitOutputForKey<Key>> {
+	return submitEndpoints[key].submit(fetch, payload);
 }
