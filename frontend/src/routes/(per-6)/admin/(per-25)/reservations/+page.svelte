@@ -49,28 +49,28 @@
 			</thead>
 
 			<tbody>
-				{#each reservations.records as r}
+				{#each reservations.records as reservation}
 					<tr>
-						<td class="mono">{r.id}</td>
+						<td class="mono">{reservation.id}</td>
 
 						<td>
-							<a class="link" href={`/admin/users/user-${r.user?.id ?? r.user_id}`}>
-								User {r.user?.id ?? r.user_id}
+							<a class="link" href={`/admin/users/user-${reservation.user?.id ?? reservation.user_id}`}>
+								User {reservation.user?.id ?? reservation.user_id}
 							</a>
 						</td>
 
 						<td>
-							<a class="link" href={`/admin/rooms/room-${r.room_id}`}>
-								Room {r.room_id}
+							<a class="link" href={`/admin/rooms/room-${reservation.room_id}`}>
+								Room {reservation.room_id}
 							</a>
 						</td>
 
-						<td class="mono">{formatDateTime(r.booked_at)}</td>
-						<td class="mono">{r.booked_from}</td>
-						<td class="mono">{r.booked_till}</td>
+						<td class="mono">{formatDateTime(reservation.booked_at)}</td>
+						<td class="mono">{reservation.booked_from}</td>
+						<td class="mono">{reservation.booked_till}</td>
 
 						<td>
-							{#if r.checked_in === 1}
+							{#if reservation.checked_in === 1}
 								<span class="badge ok">Checked in</span>
 							{:else}
 								<span class="badge">Not checked in</span>
@@ -78,29 +78,29 @@
 						</td>
 
 						<td class="mono">
-							{#if r.checked_in_at}
-								{formatDateTime(r.checked_in_at)}
+							{#if reservation.checked_in_at}
+								{formatDateTime(reservation.checked_in_at)}
 							{:else}
 								<span class="muted">—</span>
 							{/if}
 						</td>
 
 						<td class="mono">
-							{#if r.checked_out_at}
-								{formatDateTime(r.checked_out_at)}
+							{#if reservation.checked_out_at}
+								{formatDateTime(reservation.checked_out_at)}
 							{:else}
 								<span class="muted">—</span>
 							{/if}
 						</td>
 
-						<td><span class="badge">{r.payment_method}</span></td>
+						<td><span class="badge">{reservation.payment_method}</span></td>
 
-						<td><span class="badge neutral">#{r.status_id}</span></td>
+						<td><span class="badge neutral">#{reservation.status_id}</span></td>
 
 						<td class="actions">
-							<a class="btn small" href={`/admin/reservations/reservation-${r.id}`}>View</a>
-							<a class="btn small" href={`/admin/reservations/update-${r.id}`}>Edit</a>
-							<a class="btn small danger" href={`/admin/reservations/delete-${r.id}`}>Delete</a>
+							<a class="btn small" href={`/admin/reservations/reservation-${reservation.id}`}>View</a>
+							<a class="btn small" href={`/admin/reservations/update-${reservation.id}`}>Edit</a>
+							<a class="btn small danger" href={`/admin/reservations/delete-${reservation.id}`}>Delete</a>
 						</td>
 					</tr>
 				{/each}
