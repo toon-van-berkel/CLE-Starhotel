@@ -1,16 +1,17 @@
 <nav>
-    <ul class="nav-ul">
+    <ul>
         <div class="flex">
-            <li><a class="bg-primary :hover" href="/">home</a></li>
+            <li><a class="bg-primary" href="/">SH</a></li>
+            <li><a class="navinfo" href="/">Starhotel</a></li>
             
         </div>
         <div class="flex">
-            <li><a href="/details">Details</a></li>
-            <li><a href="/rooms">Rooms</a></li>
-            <li><a href="/about">About</a></li>
+            <li><a class="navinfo" href="/about">About</a></li>
+            <li><a class="navinfo" href="/rooms">Rooms</a></li>
+            <li><a class="navinfo" href="/reservation-confirmation">Confirmation</a></li>
+            <li><a class="navinfo" href="/reservation">Reserveren</a></li>
         </div>
     </ul>
-
-    <hr>
 </nav>
+<hr>
 

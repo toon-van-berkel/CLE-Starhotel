@@ -1,5 +1,5 @@
-import { PUBLIC_API_BASE } from '$env/static/public';
-import type { FetchLike } from '$lib/api/client/apiTypes';
+import { PUBLIC_API_BASE } from "$env/static/public";
+import type { FetchLike } from "$lib/api/client/apiTypes";
 
 export type ApiError = Error & {
 	status?: number;

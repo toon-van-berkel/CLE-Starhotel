@@ -3,14 +3,14 @@
  * ------------------------------------------ */
 // Responses
 import type {
-	// Rooms
-	RoomsListResponse,
-	RoomRecordResponse,
+  // Rooms
+  RoomsListResponse,
+  RoomRecordResponse,
 
-	// Tickets (Contacts)
-	ContactListResponse,
-	ContactRecordResponse,
-	ContactResponse,
+  // Tickets (Contacts)
+  ContactListResponse,
+  ContactRecordResponse,
+  ContactResponse,
 
 	// Auth
 	MeResponse,
@@ -98,6 +98,6 @@ export type ApiSubmitMap = {
 
 // FETCH
 export type FetchLike = (
-	input: RequestInfo | URL,
-	init?: RequestInit
+  input: RequestInfo | URL,
+  init?: RequestInit
 ) => Promise<Response>;

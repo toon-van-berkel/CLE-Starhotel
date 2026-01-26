@@ -13,8 +13,6 @@ package-lock.json
 # OS
 .DS_Store
 Thumbs.db
-.idea
-.Thumbs.db
 
 # Env
 .env
