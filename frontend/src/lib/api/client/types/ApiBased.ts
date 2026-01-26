@@ -27,7 +27,8 @@ import type {
 	ReservationRecordResponse,
 	ReservationResponse,
 	ReservationUpdateResponse,
-	ReservationDeleteResponse
+	ReservationDeleteResponse,
+	ReservationCancelResponse
 } from '$lib/api/client/types/ApiResponse';
 
 // Inputs + Submits
@@ -45,7 +46,8 @@ import type {
 import type {
   ReservationInput,
   ReservationUpdateInput,
-  ReservationDeleteInput
+  ReservationDeleteInput,
+  ReservationCancelInput
 } from '$lib/api/types/reservation';
 
 // Base
@@ -89,6 +91,7 @@ export type ApiSubmitMap = {
 	reservation: Submit<ReservationInput, ReservationResponse>;
 	reservationUpdate: Submit<ReservationUpdateInput, ReservationUpdateResponse>;
 	reservationDelete: Submit<ReservationDeleteInput, ReservationDeleteResponse>;
+	reservationCancel: Submit<ReservationCancelInput, ReservationCancelResponse>;
 
 	// User
 	login: Submit<LoginInput, LoginResponse>;

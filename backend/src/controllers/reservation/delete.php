@@ -2,28 +2,43 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/bootstrap.php';
-require_once __DIR__ . '/_helpers.php';
 
-$uid = currentUserId();
-if (!$uid) jsonResponse(['ok' => false, 'error' => 'Not logged in'], 401);
+// login required
+$user = require_login();
+$uid = (int)($user['id'] ?? 0);
+if ($uid <= 0) json_error('Unauthorized', 401);
 
-$body = readJsonBody();
+// db required
+if (!isset($pdo) || !($pdo instanceof PDO)) {
+	json_error('Database connection missing ($pdo)', 500);
+}
 
+$body = read_json_body();
 $id = (int)($body['id'] ?? 0);
-if ($id <= 0) jsonResponse(['ok' => false, 'error' => 'Invalid id'], 400);
 
-// pas aan als jouw status ids anders zijn
-const CANCELLED_STATUS_ID = 3;
+if ($id <= 0) {
+	json_error('Invalid id', 422, ['fields' => ['id' => 'Reservation id is required']]);
+}
 
 try {
-	$stmt = $pdo->prepare("
-		UPDATE reservations
-		SET status_id = :cancelled
-		WHERE id = :id AND user_id = :uid
-	");
-	$stmt->execute(['cancelled' => CANCELLED_STATUS_ID, 'id' => $id, 'uid' => $uid]);
+	// Check existence (optional but gives better errors)
+	$stmt = $pdo->prepare("SELECT id FROM reservations WHERE id = :id LIMIT 1");
+	$stmt->execute(['id' => $id]);
+	$r = $stmt->fetch(PDO::FETCH_ASSOC);
 
-	jsonResponse(['ok' => true]);
+	if (!$r) {
+		json_error('Reservation not found', 404);
+	}
+
+	// HARD DELETE
+	$del = $pdo->prepare("DELETE FROM reservations WHERE id = :id");
+	$del->execute(['id' => $id]);
+
+	if ($del->rowCount() < 1) {
+		json_error('Delete failed', 500);
+	}
+
+	json_ok(['ok' => true, 'deleted_id' => $id]);
 } catch (Throwable $e) {
-	jsonResponse(['ok' => false, 'error' => 'Server error'], 500);
+	json_error('Server error', 500);
 }

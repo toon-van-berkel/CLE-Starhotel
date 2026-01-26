@@ -156,7 +156,7 @@
 		</label>
 
 		<div class="actions">
-			<button type="button" class="btn secondary" onclick={() => goto('/reservations')} disabled={submitting}>
+			<button type="button" class="btn secondary" onclick={() => goto('/admin/reservations')} disabled={submitting}>
 				Cancel
 			</button>
 			<button type="submit" class="btn" disabled={submitting || loadingRooms}>

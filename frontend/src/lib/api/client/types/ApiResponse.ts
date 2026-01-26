@@ -18,3 +18,11 @@ export type  {
     RoomsListResponse,
     RoomRecordResponse
 } from '$lib/api/types/room';
+export type {
+	ReservationsListResponse,
+	ReservationRecordResponse,
+	ReservationResponse,
+	ReservationUpdateResponse,
+	ReservationDeleteResponse,
+	ReservationCancelResponse
+} from '$lib/api/types/reservation'

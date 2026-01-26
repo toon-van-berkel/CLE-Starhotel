@@ -35,12 +35,6 @@ if ($method === 'GET' && $uri === '/api/me') {
   require __DIR__ . '/../src/controllers/user/me.php';
   exit;
 }
-// Reservation
-if ($method === 'POST' && $uri === '/api/reservation') {
-  require __DIR__ . '/../src/controllers/reservation/reservation.php';
-  exit;
-}
-
 if ($method === 'GET' && $uri === '/api/confirm') {
   require __DIR__ . '/../src/controllers/confirm/confirmation.php';
   exit;
@@ -97,6 +91,11 @@ if ($method === 'POST' && $uri === '/api/reservation/delete') {
 	require __DIR__ . '/../src/controllers/reservation/delete.php';
 	exit;
 }
+if ($method === 'POST' && $uri === '/api/reservation/cancel') {
+	require __DIR__ . '/../src/controllers/reservation/cancel.php';
+	exit;
+}
+
 
 http_response_code(404);
 echo json_encode(['error' => 'Not found'], JSON_UNESCAPED_UNICODE);

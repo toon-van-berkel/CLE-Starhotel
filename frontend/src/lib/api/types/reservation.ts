@@ -63,3 +63,5 @@ export type ReservationUpdateResponse =
 export type ReservationDeleteResponse =
 	| { ok: true }
 	| { ok: false; error: string };
+export type ReservationCancelInput = { id: number };
+export type ReservationCancelResponse = { ok: true; cancelled_id: number };

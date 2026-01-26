@@ -100,6 +100,7 @@
 						<td class="actions">
 							<a class="btn small" href={`/admin/reservations/reservation-${reservation.id}`}>View</a>
 							<a class="btn small" href={`/admin/reservations/update-${reservation.id}`}>Edit</a>
+							<a class="btn small danger" href={`/admin/reservations/cancel-${reservation.id}`}>Cancel</a>
 							<a class="btn small danger" href={`/admin/reservations/delete-${reservation.id}`}>Delete</a>
 						</td>
 					</tr>
