@@ -3,27 +3,22 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/db.php';
 
-header('Content-Type: application/json; charset=utf-8');
+$body = read_json_body();
 
 try {
-    // Read JSON body (use your helper if present)
-    if (function_exists('read_json_body')) {
-        $body = read_json_body();
-    } else {
-        $raw = file_get_contents('php://input') ?: '';
-        $body = json_decode($raw, true);
-        if (!is_array($body)) $body = [];
-    }
+    $pdo = db();
 
-    $name    = trim((string)($body['name'] ?? ''));
-    $email   = trim((string)($body['email'] ?? ''));
-    $reason  = trim((string)($body['reason'] ?? ''));
-    $title   = trim((string)($body['title'] ?? ''));
-    $message = trim((string)($body['message'] ?? ''));
+    $name = trim((string) ($body['name'] ?? ''));
+    $email = trim((string) ($body['email'] ?? ''));
+    $reason = trim((string) ($body['reason'] ?? ''));
+    $title = trim((string) ($body['title'] ?? ''));
+    $message = trim((string) ($body['message'] ?? ''));
+    $created_at = date('Y-m-d H:i:s');
+
 
     // Optional: if user is logged in you can pass user_id, otherwise null
     $userId = $body['user_id'] ?? null;
-    $userId = ($userId === null || $userId === '') ? null : (int)$userId;
+    $userId = ($userId === null || $userId === '') ? null : (int) $userId;
 
     // Choose "new/unhandled" status id
     $statusId = 1;
@@ -57,35 +52,26 @@ try {
         exit;
     }
 
-    $pdo = db();
+
 
     $stmt = $pdo->prepare("
-        INSERT INTO contact
-            (name, email, reason, title, message, status_id, admin_handled_id, created_at, handled_at, user_id)
-        VALUES
-            (:name, :email, :reason, :title, :message, :status_id, NULL, NOW(), NULL, :user_id)
+        INSERT INTO contact (name , email , reason, title , message, created_at)
+        VALUES (:name, :email, :reason, :title, :message, :created_at)
     ");
 
-    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
-    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-    $stmt->bindValue(':reason', $reason, PDO::PARAM_STR);
-    $stmt->bindValue(':title', $title, PDO::PARAM_STR);
-    $stmt->bindValue(':message', $message, PDO::PARAM_STR);
-    $stmt->bindValue(':status_id', $statusId, PDO::PARAM_INT);
+    $stmt->execute([
+        ':name' => $name,
+        ':email' => $email,
+        ':reason' => $reason,
+        ':title' => $title,
+        ':message' => $message,
+        ':created_at' => $created_at,
+    ]);
 
-    if ($userId === null) {
-        $stmt->bindValue(':user_id', null, PDO::PARAM_NULL);
-    } else {
-        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
-    }
-
-    $stmt->execute();
-
-    echo json_encode([
+    json_ok([
         'ok' => true,
-        'id' => (int)$pdo->lastInsertId()
+        'id' => (int) $pdo->lastInsertId(),
     ], JSON_UNESCAPED_UNICODE);
-
 } catch (Throwable $e) {
     http_response_code(500);
     echo json_encode([

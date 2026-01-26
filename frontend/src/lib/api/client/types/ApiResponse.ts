@@ -14,18 +14,7 @@ export type {
 	RegisterResponse,
 	LogoutResponse
 } from '$lib/api/types/auth';
-
-// Rooms
-export type {
-	RoomsListResponse,
-	RoomRecordResponse
+export type  {
+    RoomsListResponse,
+    RoomRecordResponse
 } from '$lib/api/types/room';
-
-// Reservations
-export type {
-	ReservationsListResponse,
-	ReservationRecordResponse,
-	ReservationResponse,
-	ReservationUpdateResponse,
-	ReservationDeleteResponse
-} from '$lib/api/types/reservation';

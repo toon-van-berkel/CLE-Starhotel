@@ -1,5 +1,5 @@
-import { endpoints } from '$lib/api/client/apiRoute';
-import type { ApiGetMap, FetchLike } from '$lib/api/client/apiTypes';
+import { endpoints } from "$lib/api/client/apiRoute";
+import type { ApiGetMap, FetchLike } from "$lib/api/client/apiTypes";
 
 export type ApiGetKey = keyof ApiGetMap;
 

@@ -1,32 +1,32 @@
 
 
 <script lang="ts">
+    import type {reservationDetails} from '$lib/api/confirm/reservationdetails';
 
-
-// informatie ophalen van de reservatie
-// values voor de kamer, aantal personen, datum reservatie ophalen. (moeten worden doorgegeven vanaf de reservatie pagina)
-
-// weergeven van de informatie
-
-
-
-
-import {getReservationDetails} from '$lib/api/confirm/confirmation';
-
-    // let getReservationDetails = {
-    //     kamer: "Deluxe Suite",
-    //     aantal_personen: 2,
-    //     booked_from: "2024-07-15",
-    //     booked_till: "2024-07-20"
-    // }
+  let { data } = $props<{
+    data: {
+      reservation: reservationDetails | null;
+      error: string | null;
+    };
+  }>();
 </script>
 
-<h1 class="textcenter header">De reservatie is voltooid</h1>
-<p class="textcenter ordernumber">ordernummer: #SH-19357</p>
-<p class="textcenter confirmtext">Dankuwel van uw reservatie van:</p>
+<h1>Reservering ontvangen</h1>
 
-    <ul class="textcenter margin">
-        <li class="listtext">{getReservationDetails.room_id}</li>
-        <li class="listtext">voor {getReservationDetails.totalPeople} personen</li>
-        <li class="listtext">van {getReservationDetails.booked_from} tot {getReservationDetails.booked_till}</li>
-    </ul>
+<p>Ordernummer: #SH-19258</p>
+
+
+<p>Dankuwel voor uw reservering van:</p>
+
+{#if data.reservation.error}
+  <p>{data.reservation.error}</p>
+{:else if !data.reservation.room_id}
+  <p>Room not found.</p>
+{:else}
+
+  <ul class="textcenter margin">
+    <li class="listtext">{data.reservation.room_id}</li>
+    <li class="listtext">voor {data.reservation.reservation_id} personen</li>
+    <li class="listtext">van {data.reservation.booked_from} <br> tot {data.reservation.booked_till}</li>
+  </ul>
+{/if}

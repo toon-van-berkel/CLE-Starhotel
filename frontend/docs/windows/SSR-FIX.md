@@ -57,6 +57,9 @@ copy "$PWD\certs\valet-ca.cer" "$PWD\certs\cle2test-ca.pem"
 ```powershell
 $env:NODE_EXTRA_CA_CERTS = "$PWD\certs\cle2test-ca.pem"
 ```
+```powershell
+$env:NODE_EXTRA_CA_CERTS = "$PWD\certs\valet-ca.pem"
+```
 
 Controle:
 

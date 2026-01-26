@@ -1,5 +1,5 @@
-import { endpoints } from '$lib/api/client/apiRoute';
-import type { FetchLike, ApiSubmitMap } from '$lib/api/client/apiTypes';
+import { endpoints } from "$lib/api/client/apiRoute";
+import type { FetchLike, ApiSubmitMap } from "$lib/api/client/apiTypes";
 
 export type ApiSubmitKey = keyof ApiSubmitMap;
 

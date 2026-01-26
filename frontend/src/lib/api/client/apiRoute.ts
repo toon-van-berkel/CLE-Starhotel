@@ -1,5 +1,9 @@
-import { api } from '$lib/api/client/apiBase';
-import type { ApiGetMap, ApiSubmitMap, FetchLike } from '$lib/api/client/apiTypes';
+import { api } from "$lib/api/client/apiBase";
+import type {
+  ApiGetMap,
+  ApiSubmitMap,
+  FetchLike,
+} from "$lib/api/client/apiTypes";
 
 /* ------------------------------------------
  * Keys
@@ -49,12 +53,12 @@ export const endpoints = {
 				method: 'GET'
 			}),
 
-		submit: (fetch: FetchLike, payload: ApiSubmitMap["room"]["input"]) =>
-			api<ApiSubmitMap["room"]["output"]>(fetch, "/api/rooms", {
-				method: "POST",
-				body: JSON.stringify(payload),
-			}),
-	},
+    submit: (fetch: FetchLike, payload: ApiSubmitMap["room"]["input"]) =>
+      api<ApiSubmitMap["room"]["output"]>(fetch, "/api/rooms", {
+        method: "POST",
+        body: JSON.stringify(payload),
+      }),
+  },
 
 	// Contact
 	contacts: {
