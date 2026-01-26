@@ -16,7 +16,6 @@ export async function requireLoggedOut(fetchFn: FetchLike, to = '/profile') {
 export async function requireRoleIdThatHasPer(fetchFn: FetchLike, perId: number, to = '/403') {
 	const user = await requireLoggedIn(fetchFn);
 	if (!user.permission_ids?.includes(perId)) throw redirect(303, to);
-	console.log('ME perms:', user.permission_ids, 'perId:', perId, 'types:', typeof user.permission_ids?.[0], typeof perId);
 	return user;
 }
 export async function requireAnyPermission(fetchFn: FetchLike, perIds: number[], to = '/403') {

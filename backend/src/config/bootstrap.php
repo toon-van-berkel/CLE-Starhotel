@@ -27,12 +27,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
     exit;
 }
 
-// ---------- Sessions (cross-site cookie for localhost -> https domain) ----------
-$isHttps =
-    (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-    || (($_SERVER['SERVER_PORT'] ?? '') == 443)
-    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
-
+// ---------- Sessions ----------
 session_name('starhotel_session');
 session_set_cookie_params([
     'lifetime' => 0,
@@ -70,4 +65,28 @@ function read_json_body(): array {
 function require_login(): array {
     if (!isset($_SESSION['user'])) json_error('Unauthorized', 401);
     return $_SESSION['user'];
+}
+
+// ---------- DB (PDO) ----------
+// Expected .env keys (choose whichever you already use, this supports both styles):
+// DB_HOST, DB_NAME, DB_USER, DB_PASS  (recommended)
+// OR DATABASE_HOST, DATABASE_NAME, DATABASE_USER, DATABASE_PASS
+
+$dbHost = (string) env('DB_HOST', env('DATABASE_HOST', '127.0.0.1'));
+$dbName = (string) env('DB_NAME', env('DATABASE_NAME', 'starhotel'));
+$dbUser = (string) env('DB_USER', env('DATABASE_USER', 'root'));
+$dbPass = (string) env('DB_PASS', env('DATABASE_PASS', ''));
+$dbPort = (string) env('DB_PORT', '3306');
+
+$dsn = "mysql:host={$dbHost};port={$dbPort};dbname={$dbName};charset=utf8mb4";
+
+try {
+    $pdo = new PDO($dsn, $dbUser, $dbPass, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
+} catch (Throwable $e) {
+    // Do not leak details in production
+    json_error('Database connection failed', 500);
 }
