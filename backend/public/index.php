@@ -32,6 +32,11 @@ if ($method === 'GET' && $uri === '/api/me') {
   require __DIR__ . '/../src/controllers/user/me.php';
   exit;
 }
+// Reservation
+if ($method === 'POST' && $uri === '/api/reservation') {
+  require __DIR__ . '/../src/controllers/reservation/reservation.php';
+  exit;
+}
 
 if ($method === 'GET' && $uri === '/api/confirm') {
   require __DIR__ . '/../src/controllers/confirm/confirmation.php';

@@ -1,7 +1,8 @@
 export type reservationDetails = {
-    room_id: number;
-    booked_from: string;
-    booked_till: string;
+    name: string;
     totalPeople: number;
+    bookedFrom: string;
+    bookedTill: string;
 }
+
 
