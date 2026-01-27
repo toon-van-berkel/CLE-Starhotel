@@ -1,0 +1,79 @@
+.breadcrumbs {
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  &__link {
+    color: rgba($primary-color, 0.4);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &:hover {
+      color: $accent-color;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: $accent-color;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  &__text {
+    color: rgba($primary-color, 0.3);
+    cursor: default;
+  }
+
+  &__current {
+    color: $accent-color;
+    font-weight: 700;
+  }
+
+  &__separator {
+    color: rgba($primary-color, 0.2);
+    font-size: 0.8rem;
+    user-select: none;
+    font-weight: 300;
+  }
+}
+
+@media (max-width: 600px) {
+  .breadcrumbs {
+    &__list {
+      gap: 0.5rem;
+    }
+    &__item {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+    }
+  }
+}

@@ -1,0 +1,156 @@
+.rooms-page {
+  padding: 80px 0;
+  width: 100%;
+}
+
+.rooms-header {
+  text-align: center;
+  margin-bottom: 60px;
+
+  .subtitle {
+    color: $accent-color;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    color: $primary-color;
+  }
+
+  p {
+    color: rgba($primary-color, 0.6);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 40px;
+  padding: 0 20px;
+}
+
+.room-card {
+  background: white;
+  border: 1px solid rgba($primary-color, 0.05);
+  transition: $transition;
+  display: flex;
+  flex-direction: column;
+
+  .image-wrapper {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+
+    .status-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba($primary-color, 0.9);
+      color: white;
+      padding: 5px 15px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      backdrop-filter: blur(5px);
+    }
+  }
+
+  .room-content {
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    .room-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 15px;
+
+      h2 {
+        font-family: "Georgia", serif;
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .capacity {
+        font-size: 0.8rem;
+        color: $accent-color;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 1px;
+      }
+    }
+
+    .room-description {
+      color: rgba($primary-color, 0.7);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .room-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 25px;
+      border-top: 1px solid rgba($primary-color, 0.05);
+
+      .price-indicator {
+        font-weight: 600;
+        color: $primary-color;
+        font-size: 0.9rem;
+      }
+
+      .view-button {
+        text-decoration: none;
+        color: $primary-color;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        border-bottom: 2px solid $accent-color;
+        padding-bottom: 4px;
+        transition: $transition;
+
+        &:hover {
+          color: $accent-color;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+
+    .image-wrapper img {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .rooms-grid {
+    grid-template-columns: 1fr;
+  }
+  .rooms-header h1 {
+    font-size: 2.5rem;
+  }
+}

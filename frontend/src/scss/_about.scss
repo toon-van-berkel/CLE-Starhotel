@@ -1,0 +1,98 @@
+.about-page {
+  @extend .admin-detail-page;
+  margin-top: 80px;
+
+  .about-header {
+    @extend .profile-header;
+    margin-bottom: 5rem;
+  }
+
+  .about-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 6rem;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-content {
+      h2 {
+        font-family: "Georgia", serif;
+        font-size: 2.2rem;
+        color: $primary-color;
+        margin-bottom: 1.5rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: rgba($primary-color, 0.7);
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    .hero-image {
+      background: rgba($primary-color, 0.03);
+      border: 1px solid rgba($primary-color, 0.1);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        filter: grayscale(0.2) contrast(1.1) opacity(0.9);
+        transition: filter 0.3s ease;
+
+        &:hover {
+          filter: grayscale(0);
+        }
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  .values-grid {
+    @extend .admin-grid;
+    margin-top: 4rem;
+
+    .value-card {
+      @extend .admin-card;
+      padding: 3rem;
+      text-align: center;
+      flex-direction: column;
+
+      .icon {
+        font-size: 2.5rem;
+        color: $accent-color;
+        margin-bottom: 1.5rem;
+      }
+
+      h3 {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  .about-footer {
+    text-align: center;
+    margin-top: 6rem;
+    padding: 4rem;
+    background: rgba($primary-color, 0.02);
+    border-radius: 4px;
+
+    h2 {
+      font-family: "Georgia", serif;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+}

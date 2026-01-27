@@ -1,132 +1,168 @@
 <script lang="ts">
-    import { apiSubmit } from '$lib/api/client/__index__';
-    import type { ContactInput } from '$lib/api/types/contact';
-    import type {ContactResponse} from '$lib/api/client/apiTypes';
-    import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
+  import { apiSubmit } from "$lib/api/client/__index__";
+  import type { ContactInput } from "$lib/api/types/contact";
+  import type { ContactResponse } from "$lib/api/client/apiTypes";
+  import Breadcrumbs from "$lib/components/Breadcrumbs.svelte";
 
-    let form: ContactInput = {
-        name: '',
-        email: '',
-        reason: '',
-        title: '',
-        message: '',
-        user_id: null
-    };
+  let form: ContactInput = {
+    name: "",
+    email: "",
+    reason: "",
+    title: "",
+    message: "",
+    user_id: null,
+  };
 
-    let loading = false;
-    let result: ContactResponse | null = null;
+  let loading = false;
+  let result: ContactResponse | null = null;
+  let fieldErrors: Record<string, string> = {};
+  let generalError = "";
 
-    // field-level errors from backend validation
-    let fieldErrors: Record<string, string> = {};
-    let generalError = '';
+  async function onSubmit() {
+    loading = true;
+    result = null;
+    generalError = "";
+    fieldErrors = {};
 
-    async function onSubmit() {
-        loading = true;
-        result = null;
-        generalError = '';
-        fieldErrors = {};
+    try {
+      const res = await apiSubmit("contact", fetch, form);
+      result = res;
 
-        try {
-            // IMPORTANT: use event fetch from load() only if you pass it in.
-            // On client-side pages, global fetch works fine for same-origin.
-            const res = await apiSubmit('contact', fetch, form);
-
-            result = res;
-
-            if (res.ok) {
-                // reset form on success
-                form = {
-                    name: '',
-                    email: '',
-                    reason: '',
-                    title: '',
-                    message: '',
-                    user_id: null
-                };
-            }
-        } catch (e) {
-            // If your api() helper throws with parsed JSON in message, you can improve this,
-            // but this is safe fallback.
-            generalError = (e as Error).message || 'Something went wrong';
-        } finally {
-            loading = false;
-        }
+      if (res.ok) {
+        form = {
+          name: "",
+          email: "",
+          reason: "",
+          title: "",
+          message: "",
+          user_id: null,
+        };
+      } else if (res.fields) {
+        fieldErrors = res.fields;
+      }
+    } catch (e) {
+      generalError = (e as Error).message || "Something went wrong";
+    } finally {
+      loading = false;
     }
+  }
 </script>
 
 <Breadcrumbs
-	names={['Admin Panel', 'tickets', 'create']}
-	links={['/admin', '/admin/tickets', 'create']}
+  names={["Admin Panel", "Tickets", "Create"]}
+  links={["/admin", "/admin/tickets", "/admin/tickets/create"]}
 />
 
-<div class="wrap">
-    <h1>Create ticket</h1>
-    <p class="sub">Send a message to the team.</p>
+<section class="admin-detail-page">
+  <div class="pageHead">
+    <div class="header-content">
+      <h1>Create New Ticket</h1>
+      <p class="muted">
+        Handmatig een nieuw support ticket aanmaken in het systeem.
+      </p>
+    </div>
+    <div class="headActions">
+      <a class="btn" href="/admin/tickets">Back to list</a>
+    </div>
+  </div>
 
-    <form class="card" on:submit|preventDefault={onSubmit}>
-        <div class="grid">
-        <div class="field">
-            <label for="name">Name</label>
-            <input id="name" type="text" bind:value={form.name} placeholder="Your name" autocomplete="name"/>
-            {#if fieldErrors.name}<div class="err">{fieldErrors.name}</div>{/if}
-        </div>
+  {#if generalError || (result && !result.ok)}
+    <div class="alert">
+      <p>
+        <strong>Fout:</strong>
+        {generalError || result?.error || "Controleer de velden."}
+      </p>
+    </div>
+  {/if}
 
-        <div class="field">
-            <label for="email">Email</label>
-            <input id="email" type="email" bind:value={form.email} placeholder="you@example.com" autocomplete="email" />
-            {#if fieldErrors.email}<div class="err">{fieldErrors.email}</div>{/if}
-        </div>
+  {#if result?.ok}
+    <div
+      class="badge ok"
+      style="display: block; padding: 1.5rem; margin-bottom: 2rem; font-size: 1rem;"
+    >
+      ✅ Ticket succesvol aangemaakt! ID: #{result.id}
+    </div>
+  {/if}
 
-        <div class="field">
-            <label for="reason">Reason</label>
-            <select id="reason" bind:value={form.reason}>
-                <option value="" disabled>Select a reason</option>
-                <option value="General question">General question</option>
-                <option value="Support">Support</option>
-                <option value="Bug report">Bug report</option>
-                <option value="Feature request">Feature request</option>
-                <option value="Other">Other</option>
-            </select>
-            {#if fieldErrors.reason}<div class="err">{fieldErrors.reason}</div>{/if}
-        </div>
+  <form class="admin-card" on:submit|preventDefault={onSubmit}>
+    <div class="detail-section">
+      <h3>Afzender Informatie</h3>
+      <div class="grid">
+        <label>
+          <span>Volledige Naam</span>
+          <input
+            type="text"
+            bind:value={form.name}
+            placeholder="Naam van de gast"
+            disabled={loading}
+          />
+          {#if fieldErrors.name}<small class="err">{fieldErrors.name}</small
+            >{/if}
+        </label>
+        <label>
+          <span>Email Adres</span>
+          <input
+            type="email"
+            bind:value={form.email}
+            placeholder="gast@voorbeeld.nl"
+            disabled={loading}
+          />
+          {#if fieldErrors.email}<small class="err">{fieldErrors.email}</small
+            >{/if}
+        </label>
+      </div>
+    </div>
 
-        <div class="field">
-            <label for="title">Title</label>
-            <input id="title" type="text" bind:value={form.title} placeholder="Short title" />
-            {#if fieldErrors.title}<div class="err">{fieldErrors.title}</div>{/if}
-        </div>
+    <div class="detail-section">
+      <h3>Ticket Details</h3>
+      <div class="grid">
+        <label>
+          <span>Reden van contact</span>
+          <select bind:value={form.reason} disabled={loading}>
+            <option value="" disabled>Selecteer een reden</option>
+            <option value="General question">General question</option>
+            <option value="Support">Support</option>
+            <option value="Bug report">Bug report</option>
+            <option value="Feature request">Feature request</option>
+            <option value="Other">Other</option>
+          </select>
+          {#if fieldErrors.reason}<small class="err">{fieldErrors.reason}</small
+            >{/if}
+        </label>
+        <label>
+          <span>Onderwerp</span>
+          <input
+            type="text"
+            bind:value={form.title}
+            placeholder="Korte titel"
+            disabled={loading}
+          />
+          {#if fieldErrors.title}<small class="err">{fieldErrors.title}</small
+            >{/if}
+        </label>
+      </div>
+    </div>
 
-        <div class="field full">
-            <label for="message">Message</label>
-            <textarea id="message" rows="6" bind:value={form.message} placeholder="Write your message..." ></textarea>
-            {#if fieldErrors.message}<div class="err">{fieldErrors.message}</div>{/if}
-        </div>
-        </div>
+    <div class="detail-section">
+      <h3>Berichtinhoud</h3>
+      <label>
+        <span>Bericht</span>
+        <textarea
+          rows="8"
+          bind:value={form.message}
+          placeholder="Omschrijf het probleem of de vraag..."
+          disabled={loading}
+        ></textarea>
+        {#if fieldErrors.message}<small class="err">{fieldErrors.message}</small
+          >{/if}
+      </label>
+    </div>
 
-        {#if generalError}
-            <div class="banner bad">{generalError}</div>
-        {/if}
-
-        {#if result && !result.ok}
-            <div class="banner bad">
-                {result.error}
-            </div>
-
-            {#if result.fields}
-                {#each Object.entries(result.fields) as [k, v]}
-                    <div class="minierr"><b>{k}</b>: {v}</div>
-                {/each}
-            {/if}
-        {/if}
-
-        {#if result?.ok}
-            <div class="banner good">
-                Sent! Ticket id: {result.id}
-            </div>
-        {/if}
-
-        <button class="btn" type="submit" disabled={loading}>
-            {#if loading}Sending...{:else}Send message{/if}
-        </button>
-    </form>
-</div>
+    <div class="form-actions">
+      <a class="btn" href="/admin/tickets">Annuleren</a>
+      <button class="btn primary" type="submit" disabled={loading}>
+        {loading ? "Bezig met verzenden..." : "Ticket Aanmaken"}
+      </button>
+    </div>
+  </form>
+</section>
