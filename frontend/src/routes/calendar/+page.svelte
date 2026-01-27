@@ -5,12 +5,12 @@
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  let checkIn = tomorrow;
-  let checkOut = new Date();
-  checkOut.setDate(tomorrow.getDate() + 2);
+  let booked_from = tomorrow;
+  let booked_till = new Date();
+  booked_till.setDate(tomorrow.getDate() + 2);
 
   // 2. Validatie check
-  $: isValid = checkOut > checkIn;
+  $: isValid = booked_till > booked_from;
 
   // 3. notification logica
   let loadMessage = false;
@@ -32,7 +32,7 @@
     }
   }
 
-  function toonDatum(datum: Date) {
+  function showDate(datum: Date) {
     return datum.toLocaleDateString("nl-NL", { day: "numeric", month: "long" });
   }
 </script>
@@ -49,16 +49,16 @@
   <div class="datums">
     <div class="check">
       <p>Check-in</p>
-      <Datepicker bind:selected={checkIn} start={tomorrow} />
-      <p class="small">{toonDatum(checkIn)}</p>
+      <Datepicker bind:selected={booked_from} start={tomorrow} />
+      <p class="small">{showDate(booked_from)}</p>
     </div>
 
     <div class="check">
       <p>Check-out</p>
       <div class:fout={!isValid}>
-        <Datepicker bind:selected={checkOut} start={tomorrow} />
+        <Datepicker bind:selected={booked_till} start={tomorrow} />
       </div>
-      <p class="small">{toonDatum(checkOut)}</p>
+      <p class="small">{showDate(booked_till)}</p>
     </div>
   </div>
 
