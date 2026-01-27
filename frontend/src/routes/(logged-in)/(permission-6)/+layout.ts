@@ -1,8 +1,8 @@
 import type { LayoutLoad } from './$types';
-import { requireLoggedIn } from '$lib/guards/guards';
+import { requirePermission } from '$lib/guards/guards';
 
 export const load: LayoutLoad = async ({ parent }) => {
   const { user } = await parent();
-  requireLoggedIn(user);
+  requirePermission(user, 6);
   return {};
 };

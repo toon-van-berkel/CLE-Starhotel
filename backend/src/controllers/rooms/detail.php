@@ -1,33 +1,20 @@
 <?php
 declare(strict_types=1);
-require_once __DIR__ . '/../../config/db.php';
 
-header('Content-Type: application/json; charset=utf-8');
-
-$id = $_GET['id'] ?? null;
-
-try {
-    $pdo = db();
-
-    $stmt = $pdo->prepare('SELECT * FROM rooms WHERE id = :id');
-    $stmt->bindValue(':id', (int)$id, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $room = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$room) {
-        http_response_code(404);
-        echo json_encode(['error' => 'Room not found']);
-        exit;
-    }
-
-    echo json_encode([
-        'record' => $room
-    ], JSON_UNESCAPED_UNICODE);
-
-} catch (Throwable $e) {
-    http_response_code(500);
-    echo json_encode([
-        'error' => 'Internal server error'
-    ]);
+$id = (int)($_GET['id'] ?? 0);
+if ($id <= 0) {
+  json_response(['ok' => false, 'error' => 'Invalid room id'], 400);
+  exit;
 }
+
+$pdo = db();
+$stmt = $pdo->prepare("SELECT id, title, description, price_per_night, capacity FROM rooms WHERE id = ?");
+$stmt->execute([$id]);
+$room = $stmt->fetch();
+
+if (!$room) {
+  json_response(['ok' => false, 'error' => 'Room not found'], 404);
+  exit;
+}
+
+json_response(['ok' => true, 'room' => $room]);

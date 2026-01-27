@@ -1,15 +1,25 @@
 <?php
 declare(strict_types=1);
 
-require_once __DIR__ . '/../../config/bootstrap.php';
-require_once __DIR__ . '/../../config/db.php';
+$userId = current_user_id();
+if (!$userId) {
+  json_response(['ok' => true, 'user' => null]);
+  exit;
+}
 
-$user = require_login();
+$pdo = db();
 
-try {
-    $pdo = db();
-    $pdo->prepare("UPDATE users SET last_seen = NOW() WHERE id = :id")
-        ->execute(['id' => (int)$user['id']]);
-} catch (Throwable $e) {}
+// pas kolommen aan aan jouw users tabel
+$stmt = $pdo->prepare("SELECT id, first_name, last_name, email, phone, status_id FROM users WHERE id = ?");
+$stmt->execute([$userId]);
+$user = $stmt->fetch();
 
-json_ok(['ok' => true, 'user' => $user]);
+if (!$user) {
+  json_response(['ok' => true, 'user' => null]);
+  exit;
+}
+
+$user['role_ids'] = get_user_role_ids($userId);
+$user['permission_ids'] = get_user_permission_ids($userId);
+
+json_response(['ok' => true, 'user' => $user]);

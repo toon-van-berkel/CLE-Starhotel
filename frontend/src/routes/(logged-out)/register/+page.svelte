@@ -1,54 +1,58 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
-	import { apiSubmit } from '$lib/api/client/apiSubmit';
+  import { goto } from '$app/navigation';
+  import { register } from '$lib/stores/session';
 
-	let first_name = '';
-	let last_name = '';
-	let email = '';
-	let phone = '';
-	let password = '';
+  let firstName = '';
+  let lastName = '';
+  let email = '';
+  let password = '';
+  let errorMessage = '';
 
-	let errorMsg = '';
-	let fieldErrors: Record<string, string> = {};
-
-	async function submit(e: SubmitEvent) {
-		e.preventDefault();
-		errorMsg = '';
-		fieldErrors = {};
-
-		const res = await apiSubmit('register', fetch, { first_name, last_name, email, phone, password });
-
-		if (!res.ok) {
-		errorMsg = res.error || 'Register failed';
-		fieldErrors = res.fields ?? {};
-		return;
-		}
-
-		await goto('/login');
-	}
+  async function handleSubmit() {
+    errorMessage = '';
+    try {
+      await register(fetch, { first_name: firstName, last_name: lastName, email, password });
+      await goto('/rooms');
+    } catch (error: any) {
+      errorMessage = error?.message ?? 'Register failed';
+    }
+  }
 </script>
 
 <h1>Register</h1>
 
-<form onsubmit={submit}>
-	<input placeholder="First name" bind:value={first_name} />
-	{#if fieldErrors.first_name}<small>{fieldErrors.first_name}</small>{/if}
+<form on:submit|preventDefault={handleSubmit}>
+  <label>
+    First name
+    <input bind:value={firstName} />
+  </label>
 
-	<input placeholder="Last name" bind:value={last_name} />
-	{#if fieldErrors.last_name}<small>{fieldErrors.last_name}</small>{/if}
+  <br />
 
-	<input placeholder="Email" bind:value={email} />
-	{#if fieldErrors.email}<small>{fieldErrors.email}</small>{/if}
+  <label>
+    Last name
+    <input bind:value={lastName} />
+  </label>
 
-	<input placeholder="Phone" bind:value={phone} />
-	{#if fieldErrors.phone}<small>{fieldErrors.phone}</small>{/if}
+  <br />
 
-	<input type="password" placeholder="Password" bind:value={password} />
-	{#if fieldErrors.password}<small>{fieldErrors.password}</small>{/if}
+  <label>
+    Email
+    <input bind:value={email} type="email" />
+  </label>
 
-	<button type="submit">Create account</button>
+  <br />
+
+  <label>
+    Password
+    <input bind:value={password} type="password" />
+  </label>
+
+  <br />
+
+  <button type="submit">Create account</button>
 </form>
 
-{#if errorMsg}
-	<p>{errorMsg}</p>
+{#if errorMessage}
+  <p>{errorMessage}</p>
 {/if}
