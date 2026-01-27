@@ -99,7 +99,9 @@
     <div class="reservation-content">
       <h2>Reserveren</h2>
       <p class="price">Voor €249,- per nacht</p>
+      <a href="/reservation">
       <button class="reserve-btn">Reserveer deze kamer</button>
+      </a>
       <a href="/rooms">
         <button class="rooms-btn">Terug naar Rooms</button>
       </a>

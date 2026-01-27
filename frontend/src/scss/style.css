@@ -431,4 +431,9 @@ input.invalid {
 }
 .footerinfo:hover {
   border-color: rgba(0, 0, 0, 0.2509803922);
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }/*# sourceMappingURL=style.css.map */

@@ -3,6 +3,52 @@
     import {upload} from '$lib/api/reservation/reservation';
     import {uploadTest} from '$lib/api/reservation/reservation';
 
+
+
+	import dayjs from 'dayjs';
+	import { Datepicker } from 'svelte-calendar';
+
+    // let format = 'dddd, MMMM D, YYYY';
+    let format = 'MMMM D, YYYY';
+
+	let checkIn = new Date();
+     checkIn.setDate(checkIn.getDate() + 1);
+	const endNextYear = dayjs().add(2, 'year').toDate();
+
+      let checkOut = new Date();
+
+    checkOut.setDate(checkIn.getDate() + 2);
+
+
+      $: isValid = checkOut > checkIn;
+
+    let loadMessage = false;
+    let message = "";
+
+
+
+    function showNotification(text: string) {
+    message = text;
+    loadMessage = true;
+
+    
+    setTimeout(() => {
+      loadMessage = false;
+    }, 3000);
+  }
+
+  function handleBooking() {
+    if (isValid) {
+      showNotification("🎉 Je reservering is opgeslagen!");
+      console.log ("reservering geslaagd")
+    }
+  }
+
+
+
+
+
+
     export let data;
 
     let submitted = false;
@@ -38,10 +84,10 @@
         errors.last_name = !input.last_name || !/^[A-Za-z\s]+$/.test(input.last_name)
             ? "Last name is required (letters only)" : "";
         errors.email = !input.email ? "Email is required" : "";
-        errors.booked_from = !input.booked_from ? "Check-in date is required" : "";
-        errors.booked_till = !input.booked_till
-            ? "Check-out date is required"
-            : (input.booked_till <= input.booked_from ? "Check-out must be after check-in" : "");
+        // errors.booked_from = !input.booked_from ? "Check-in date is required" : "";
+        // errors.booked_till = !input.booked_till
+        //     ? "Check-out date is required"
+        //     : (input.booked_till <= input.booked_from ? "Check-out must be after check-in" : "");
         errors.totalPeople =
             errors.totalPeople =
     input.totalPeople < 1 ? "Must be at least 1"
@@ -75,7 +121,28 @@
         <div class="error">{errors.email}</div>
     </div>
 
-    <div class="form-group flex-column text-field-input">
+
+    <div class="datums">
+    <div class="check">
+      <p>Check-in</p>
+      <Datepicker   bind:selected={checkIn} start={checkIn} end={endNextYear} {format} />
+    </div>
+
+    <div class="check">
+      <p>Check-out</p>
+      <div class:fout={!isValid}>
+        <Datepicker  bind:selected={checkOut} start={checkIn} end={endNextYear} {format} />
+      </div>
+    </div>
+  </div>
+
+
+
+    <!-- <Datepicker {format} start={checkIn} end={endNextYear} />
+    <Datepicker {format} start={startToday} end={endNextYear} /> -->
+
+
+    <!-- <div class="form-group flex-column text-field-input">
         <label for="bookedFrom">Check-in Date:</label>
         <input type="date" id="bookedFrom" name="bookedFrom" bind:value={input.booked_from} class:invalid={!!errors.booked_from}>
         <div class="error">{errors.booked_from}</div>
@@ -85,7 +152,7 @@
         <label for="bookedTill">Check-out Date:</label>
         <input type="date" id="bookedTill" name="bookedTill" bind:value={input.booked_till} class:invalid={!!errors.booked_till}>
         <div class="error">{errors.booked_till}</div>
-    </div>
+    </div> -->
 
     <div class="form-group flex-column text-field-input">
         <label for="numberOfPeople">Number of People:</label>
@@ -94,5 +161,29 @@
         <div class="error">{errors.totalPeople}</div>
     </div>
 
-    <button class="buttonCenter" type="submit">Submit Reservation</button>
+    <button disabled={!isValid} on:click={handleBooking} class="buttonCenter" type="submit">Submit Reservation</button>
 </form>
+
+
+
+<style>
+
+    button {
+    width: 100%;
+    padding: 12px;
+    background: #0f4a5a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background: #125a6e
+  }
+  button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+</style>

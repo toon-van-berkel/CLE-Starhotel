@@ -11,3 +11,5 @@ export const load: PageLoad = async ({ params, fetch }) => {
   const json = await res.json();
   return { room: json.record ?? null, error: null };
 };
+
+

@@ -130,21 +130,6 @@ try {
 
 
 
-        $pdoadd = db();
-
-           $stmtadd = $pdoadd->prepare('
-        INSERT INTO `reservations`(`user_id`, `status_id`, `booked_from`, `booked_till`) 
-        VALUES (:user_id, :status_id, :booked_from, :booked_till)
-    ');
-
-    $stmtadd->execute([
-        ':user_id' => $user_id,
-        ':status_id' => 'pending',
-        ':booked_from' => $booked_from,
-        ':booked_till' => $booked_till
-    ]);
-
-
     
 
 } catch (PDOException $e) {
