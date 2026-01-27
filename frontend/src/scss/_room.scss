@@ -8,27 +8,27 @@
     grid-row-gap: 20px;
     max-width: 1500px;
 
-        .room-container {
-            position: relative;
+    .room-container {
+        position: relative;
+        display: flex;
+        flex-flow: column;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 8px;
+        overflow: hidden;
+
+        .room-body {
+            padding: v.$padding-text;
             display: flex;
-            flex-flow: column;
-            width: 100%;
-            border: 1px solid black;
-            border-radius: 8px;
-            overflow: hidden;
+            flex-direction: column;
+            gap: 20px;
 
-            .room-body {
-                padding: v.$padding-text;
+            .room-data {
                 display: flex;
-                flex-direction: column;
+                justify-content: space-between;
                 gap: 20px;
-
-                .room-data {
-                    display: flex;
-                    justify-content: space-between;
-                    gap: 20px;
-                }
             }
+        }
 
         .popular {
             position: absolute;
@@ -44,17 +44,11 @@
         }
 
         .room-image {
-            object-fit: fill;
+            object-fit: cover;
             background-color: aqua;
             height: 15dvh;
             padding: 0;
             overflow: hidden;
         }
-
-
-
     }
-
-    
-    
 }

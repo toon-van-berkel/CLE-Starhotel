@@ -60,6 +60,9 @@
 }
 
 .reserve-btn {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
   width: 100%;
   padding: 0.8rem;
   background-color: var(--primary-color, #0f4a5a);
@@ -242,8 +245,8 @@
   z-index: 2;
 }
 .rooms-container .room-container .room-image {
-  -o-object-fit: fill;
-     object-fit: fill;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-color: aqua;
   height: 15dvh;
   padding: 0;

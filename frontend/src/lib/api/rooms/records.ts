@@ -1,16 +1,3 @@
-// import { api } from '$lib/api/client/api';
-// import type { Room } from '$lib/api/types/__index__';
-
-// export type RoomsResponse = {
-//     records: Room[];
-//     error?: string;
-// };
-
-// export function getRooms() {
-//     // Als jouw api() helper al "/api" prefix toevoegt, wordt dit: /api/rooms
-//     return api<RoomsResponse>('/rooms', { method: 'GET' });
-// }
-
 import type { Room } from '$lib/api/types/room';
 import { PUBLIC_API_BASE } from '$env/static/public';
 

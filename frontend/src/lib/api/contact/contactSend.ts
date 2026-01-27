@@ -1,7 +1,6 @@
 import { api } from "$lib/api/client/apiBase";
 
 export type ContactPayload = {
-  //data die wordt verstuurd naar de backend
   name: string;
   email: string;
   reason: string;

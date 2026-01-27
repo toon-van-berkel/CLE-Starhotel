@@ -89,6 +89,9 @@ $border-radius: 8px;
 }
 
 .reserve-btn {
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
   @include btn-style($primary-color, white, $primary-dark);
 }
 

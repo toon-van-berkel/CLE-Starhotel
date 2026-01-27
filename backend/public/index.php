@@ -50,12 +50,6 @@ if ($method === 'GET' && preg_match('#^/api/contact/contact-(\d+)/?$#', $uri, $m
   require __DIR__ . '/../src/controllers/contact/detail.php';
   exit;
 }
-
-if ($method === 'POST' && $uri === '/api/contact') {
-  require __DIR__ . '/../src/controllers/contact/submit.php';
-  exit;
-}
-
 if ($method === 'POST' && $uri === '/api/contact') {
   require __DIR__ . '/../src/controllers/contact/submit.php';
   exit;

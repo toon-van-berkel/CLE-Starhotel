@@ -1,22 +1,12 @@
 <script lang="ts">
-  import favicon from "$lib/assets/favicon.svg";
   import Navbar from "$lib/components/Navbar.svelte";
   import Footer from "$lib/components/Footer.svelte";
-  // import { onMount } from "svelte";
-  // import { authStore } from "$lib/api/stores/auth";
+
   import "../scss/style.css";
 
-  let { children } = $props();
-
-  // onMount(() => {
-  //   authStore.init();
-  // });
+	export let data: { user: any };
 </script>
 
-<svelte:head>
-  <link rel="icon" href={favicon} />
-</svelte:head>
-
-<Navbar></Navbar>
-{@render children()}
+<Navbar user={data.user} />
+<slot />
 <Footer></Footer>
