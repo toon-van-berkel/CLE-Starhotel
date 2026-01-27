@@ -20,7 +20,15 @@ import type {
 
 	// Contact
 	ContactUpdateResponse,
-	ContactDeleteResponse
+	ContactDeleteResponse,
+
+	// Reservations
+	ReservationsListResponse,
+	ReservationRecordResponse,
+	ReservationResponse,
+	ReservationUpdateResponse,
+	ReservationDeleteResponse,
+	ReservationCancelResponse
 } from '$lib/api/client/types/ApiResponse';
 
 // Inputs + Submits
@@ -29,30 +37,43 @@ import type {
 	ContactDeleteInput,
 	ContactUpdateInput
 } from '$lib/api/types/contact';
+
 import type {
 	LoginInput,
 	RegisterInput
 } from '$lib/api/types/auth';
 
+import type {
+  ReservationInput,
+  ReservationUpdateInput,
+  ReservationDeleteInput,
+  ReservationCancelInput
+} from '$lib/api/types/reservation';
+
 // Base
-import type {Room} from '$lib/api/types/room';
+import type { Room } from '$lib/api/types/room';
 
 // Other
-import type {
-	Get, GetById, Submit
-} from '$lib/api/client/types/ApiOther';
+import type { Get, GetById, Submit } from '$lib/api/client/types/ApiOther';
 
 /* ------------------------------------------
  *              Endpoint maps
  * ------------------------------------------ */
 // GET
 export type ApiGetMap = {
+	// Rooms
 	rooms: Get<RoomsListResponse>;
 	room: GetById<RoomRecordResponse>;
 
+	// Contacts
 	contacts: Get<ContactListResponse>;
 	contact: GetById<ContactRecordResponse>;
 
+	// Reservations
+	reservations: Get<ReservationsListResponse>;
+	reservation: GetById<ReservationRecordResponse>;
+
+	// Auth
 	me: Get<MeResponse>;
 };
 
@@ -65,6 +86,12 @@ export type ApiSubmitMap = {
 	contact: Submit<ContactInput, ContactResponse>;
 	contactUpdate: Submit<ContactUpdateInput, ContactUpdateResponse>;
 	contactDelete: Submit<ContactDeleteInput, ContactDeleteResponse>;
+
+	// Reservations
+	reservation: Submit<ReservationInput, ReservationResponse>;
+	reservationUpdate: Submit<ReservationUpdateInput, ReservationUpdateResponse>;
+	reservationDelete: Submit<ReservationDeleteInput, ReservationDeleteResponse>;
+	reservationCancel: Submit<ReservationCancelInput, ReservationCancelResponse>;
 
 	// User
 	login: Submit<LoginInput, LoginResponse>;

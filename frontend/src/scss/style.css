@@ -250,6 +250,181 @@
   overflow: hidden;
 }
 
+body {
+  max-width: 1500px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+/* Layout */
+.pageHead {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 12px 0 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.muted {
+  opacity: 0.7;
+  margin: 6px 0 0;
+}
+
+.alert {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 120, 120, 0.35);
+  background: rgba(255, 120, 120, 0.12);
+}
+
+/* Table wrapper for horizontal scroll on small screens */
+.tableWrap {
+  margin-top: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  overflow: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.adminTable {
+  width: 100%;
+  min-width: 1100px; /* forces scroll instead of squishing */
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.adminTable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.adminTable tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+
+.adminTable tbody tr:nth-child(odd) td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.adminTable tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.actionsCol {
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+/* Small UI bits */
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 12.5px;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.35);
+}
+
+.link:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.2);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.badge.ok {
+  border-color: rgba(80, 255, 170, 0.35);
+  background: rgba(80, 255, 170, 0.12);
+}
+
+.badge.neutral {
+  border-color: rgba(120, 170, 255, 0.35);
+  background: rgba(120, 170, 255, 0.12);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.06s ease, background 0.12s ease, border-color 0.12s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.small {
+  padding: 7px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.btn.primary {
+  border-color: rgba(120, 170, 255, 0.35);
+  background: rgba(120, 170, 255, 0.16);
+}
+
+.btn.danger {
+  border-color: rgba(255, 120, 120, 0.35);
+  background: rgba(255, 120, 120, 0.14);
+}
+
+@media (max-width: 720px) {
+  .pageHead {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
 * {
   margin: 0;
   padding: 0;

@@ -94,6 +94,48 @@ export const endpoints = {
 			})
 	},
 
+	// Reservations// Reservations
+	reservations: {
+		get: (fetch: FetchLike) =>
+			api<ApiGetMap['reservations']['output']>(fetch, '/api/reservation', {
+			method: 'GET'
+			})
+	},
+	reservation: {
+		get: (fetch: FetchLike, payload: ApiGetMap['reservation']['input']) =>
+				api<ApiGetMap['reservation']['output']>(fetch, `/api/reservation/reservation-${payload.id}`, {
+				method: 'GET'
+			}),
+
+		submit: (fetch: FetchLike, payload: ApiSubmitMap['reservation']['input']) =>
+			api<ApiSubmitMap['reservation']['output']>(fetch, '/api/reservation', {
+				method: 'POST',
+				body: JSON.stringify(payload)
+			})
+	},
+	reservationUpdate: {
+		submit: (fetch: FetchLike, payload: ApiSubmitMap['reservationUpdate']['input']) =>
+			api<ApiSubmitMap['reservationUpdate']['output']>(fetch, '/api/reservation/update', {
+				method: 'POST',
+				body: JSON.stringify(payload)
+			})
+	},
+	reservationDelete: {
+		submit: (fetch: FetchLike, payload: ApiSubmitMap['reservationDelete']['input']) =>
+			api<ApiSubmitMap['reservationDelete']['output']>(fetch, '/api/reservation/delete', {
+				method: 'POST',
+				body: JSON.stringify(payload)
+		})
+	},
+	reservationCancel: {
+		submit: (fetch: FetchLike, payload: ApiSubmitMap['reservationCancel']['input']) =>
+			api<ApiSubmitMap['reservationCancel']['output']>(fetch, '/api/reservation/cancel', {
+				method: 'POST',
+				body: JSON.stringify(payload)
+			})
+	},
+
+
 	// Auth
 	me: {
 		get: (fetch: FetchLike) =>
@@ -116,7 +158,7 @@ export const endpoints = {
 			})
 	},
 	logout: {
-		submit: (fetch: FetchLike) =>
+		submit: (fetch: FetchLike, _payload: ApiSubmitMap['logout']['input']) =>
 			api<ApiSubmitMap['logout']['output']>(fetch, '/api/logout', {
 				method: 'POST'
 			})

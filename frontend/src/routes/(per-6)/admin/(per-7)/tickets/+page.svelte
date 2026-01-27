@@ -8,7 +8,7 @@
 	names={['Admin Panel', 'tickets']}
 	links={['/admin', '/admin/tickets']}
 />
-
+<h1>Ticekts</h1>
 {#if data.contactsData.error}
     <p>{data.contactsData.error}</p>
 {:else}
