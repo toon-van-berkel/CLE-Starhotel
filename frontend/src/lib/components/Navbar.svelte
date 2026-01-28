@@ -12,12 +12,12 @@
     </div>
 
     <div class="nav-group">
-      <li><a class="nav-link" href="/about">About</a></li>
-      <li><a class="nav-link" href="/rooms">Rooms</a></li>
+      <li><a class="nav-link" href="/about">Over ons</a></li>
+      <li><a class="nav-link" href="/rooms">Kamers</a></li>
       <li><a class="nav-link" href="/contact">Contact</a></li>
 
       {#if user}
-        <li><a class="nav-link profile-btn" href="/profile">Profile</a></li>
+        <li><a class="nav-link profile-btn" href="/profile">Profiel</a></li>
       {:else}
         <li><a class="nav-link login-btn" href="/login">Login</a></li>
       {/if}

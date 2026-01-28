@@ -4,33 +4,32 @@
       <div class="stars">★★★★★</div>
       <span class="footer-logo">STARHOTEL</span>
       <p class="footer-description">
-        Experience unparalleled luxury and comfort in the heart of the city.
-        Your sanctuary for sophisticated travel.
+        Ervaar ongekende luxe en comfort in het hart van de stad. Uw toevluchtsoord voor stijlvol reizen.
       </p>
     </div>
 
     <div class="footer-column">
-      <h3>Explore</h3>
+      <h3>Ontdek</h3>
       <nav>
-        <a href="/rooms">Our Rooms</a>
-        <a href="/amenities">Amenities</a>
-        <a href="/dining">Dining</a>
-        <a href="/offers">Special Offers</a>
+        <a href="/rooms">Onze Kamers</a>
+        <a href="/amenities">Voorzieningen</a>
+        <a href="/dining">Dineren</a>
+        <a href="/offers">Speciale aaanbiedingen</a>
       </nav>
     </div>
 
     <div class="footer-column">
-      <h3>Support</h3>
+      <h3>Klantenservice</h3>
       <nav>
-        <a href="/contact">Contact Us</a>
-        <a href="/about">Our Story</a>
+        <a href="/contact">Contact opnemen</a>
+        <a href="/about">Ons verhaal</a>
         <a href="/faq">FAQ</a>
-        <a href="/privacy">Privacy Policy</a>
+        <a href="/privacy">Privacy Beleid</a>
       </nav>
     </div>
 
     <div class="footer-column contact-info">
-      <h3>Get in Touch</h3>
+      <h3>Neem contact met ons op</h3>
       <p class="icon-text">
         <span class="icon">📍</span> Luxury Avenue 102, Amsterdam
       </p>
@@ -45,9 +44,9 @@
 
   <div class="footer-bottom">
     <div class="footer-bottom-content">
-      <p>© 2026 Starhotel. Elegance redefined.</p>
+      <p>© 2026 Starhotel. Elegantie opnieuw gedefinieerd.</p>
       <div class="legal-links">
-        <a href="/terms">Terms</a>
+        <a href="/terms">Algemene voorwaarden</a>
         <span>|</span>
         <a href="/cookies">Cookies</a>
       </div>

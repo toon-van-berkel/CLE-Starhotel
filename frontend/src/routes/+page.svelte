@@ -7,22 +7,20 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="stars">★★★★★</div>
-      <h1>A Sanctuary of Elegance</h1>
-      <p>Discover luxury redefined in the heart of the city.</p>
+      <h1>Een oase van elegantie</h1>
+      <p>Ontdek luxe opnieuw gedefinieerd in het hart van de stad.</p>
       <div class="hero-buttons">
-        <a href="/rooms" class="btn-primary">View Rooms</a>
-        <a href="/about" class="btn-secondary">Explore Story</a>
+        <a href="/rooms" class="btn-primary">Bekijk Kamers</a>
+        <a href="/about" class="btn-secondary">Ontdek ons verhaal</a>
       </div>
     </div>
   </section>
 
   <section class="intro-section">
     <div class="intro-content">
-      <h2>The Starhotel Experience</h2>
+      <h2>The Starhotel Ervaring</h2>
       <p>
-        From the moment you step into our grand lobby, you are part of a
-        tradition of exquisite hospitality. Starhotel combines timeless
-        architecture with modern sophistication to create an unforgettable stay.
+        Vanaf het moment dat u onze imposante lobby binnenstapt, maakt u deel uit van een traditie van voortreffelijke gastvrijheid. Starhotel combineert tijdloze architectuur met moderne verfijning voor een onvergetelijk verblijf.
       </p>
       <hr class="small-hr" />
     </div>
@@ -33,36 +31,33 @@
       <div class="card-image placeholder-suite"></div>
       <div class="card-text">
         <h3>Royal Suites</h3>
-        <p>Panoramic views and bespoke furniture.</p>
+        <p>Panoramisch uitzicht en op maat gemaakte meubels.</p>
       </div>
     </div>
     <div class="feature-card">
       <div class="card-image placeholder-spa"></div>
       <div class="card-text">
         <h3>Wellness & Spa</h3>
-        <p>Rejuvenate your soul in our award-winning spa.</p>
+        <p>Breng uw geest tot rust in onze bekroonde spa.</p>
       </div>
     </div>
     <div class="feature-card">
       <div class="card-image placeholder-dining"></div>
       <div class="card-text">
-        <h3>Fine Dining</h3>
-        <p>Michelin-star cuisine served in an intimate setting.</p>
+        <h3>Culinair genieten</h3>
+        <p>Sterrenkeuze van topniveau in een intieme setting.</p>
       </div>
     </div>
   </section>
   <section class="philosophy-section">
     <div class="philosophy-image"></div>
     <div class="philosophy-text">
-      <span class="subtitle">Since 1924</span>
-      <h2>A Legacy of Hospitality</h2>
+      <span class="subtitle">Sinds 1924</span>
+      <h2>Een traditie van gastvrijheid</h2>
       <p>
-        At Starhotel, we believe that luxury is in the details. Whether it's the
-        hand-pressed linens, the curated art in our hallways, or the
-        personalized welcome from our concierge, we strive for perfection in
-        every interaction.
+       Bij Starhotel geloven we dat luxe in de details zit. Of het nu gaat om het handgestreken linnengoed, de zorgvuldig geselecteerde kunst in onze gangen of het persoonlijke welkom door onze conciërge: wij streven naar perfectie in elk contactmoment.
       </p>
-      <a href="/about" class="text-link">Read our story →</a>
+      <a href="/about" class="text-link">Lees ons verhaal →</a>
     </div>
   </section>
 
@@ -70,8 +65,7 @@
     <div class="testimonial-content">
       <span class="quote-icon">"</span>
       <blockquote>
-        The most exquisite stay I've had in years. The attention to detail and
-        the serene atmosphere of the spa made it a truly royal experience.
+     "Het meest voortreffelijke verblijf dat ik in jaren heb gehad. De aandacht voor detail en de serene sfeer van de spa maakten het tot een werkelijk koninklijke ervaring."
       </blockquote>
       <cite>— James Harrington, London</cite>
     </div>
@@ -79,9 +73,9 @@
 
   <section class="cta-section">
     <div class="cta-box">
-      <h2>Ready for an Unforgettable Stay?</h2>
-      <p>Book your room today and enjoy exclusive member benefits.</p>
-      <a href="/rooms" class="btn-primary">Check Availability</a>
+      <h2>Klaar voor een onvergetelijk verblijf?</h2>
+      <p>Reserveer vandaag nog uw kamer en geniet van exclusieve ledenvoordelen.</p>
+      <a href="/rooms" class="btn-primary">Check Beschikbaarheid</a>
     </div>
   </section>
 </div>

@@ -2071,9 +2071,12 @@ body {
 }
 
 main {
-  padding: 40px 50px;
   flex: 1;
   max-width: 1500px;
+}
+
+section {
+  padding: 40px 50px;
 }
 
 h1,
