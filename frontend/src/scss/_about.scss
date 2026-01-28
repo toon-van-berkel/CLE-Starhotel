@@ -40,7 +40,6 @@
       border: 1px solid rgba($primary-color, 0.1);
       aspect-ratio: 16 / 9;
       overflow: hidden;
-      border-radius: 4px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 
       iframe {
@@ -87,7 +86,6 @@
     margin-top: 6rem;
     padding: 4rem;
     background: rgba($primary-color, 0.02);
-    border-radius: 4px;
 
     h2 {
       font-family: "Georgia", serif;

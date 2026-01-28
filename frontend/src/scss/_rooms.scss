@@ -28,20 +28,34 @@
     font-size: 1.1rem;
   }
 }
+// --- Jouw Variabelen ---
+$primary-color: #2c3e50;
+$accent-color: #c5a059;
+$bg-color: #f8f3ee;
+$text-color: #2c3e50;
+$white: #ffffff;
+$error-color: #b42318;
+$transition: all 0.3s ease-in-out;
 
+// --- Rooms Grid Styling ---
 .rooms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-  gap: 40px;
-  padding: 0 20px;
+  // Gebruik auto-fit zodat kaarten de breedte vullen.
+  // Minimaal 350px per kaart, tenzij het scherm smaller is.
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+  gap: 30px;
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .room-card {
-  background: white;
-  border: 1px solid rgba($primary-color, 0.05);
+  background: $white;
+  border: 1px solid rgba($primary-color, 0.1);
   transition: $transition;
   display: flex;
   flex-direction: column;
+  height: 100%; // Zorgt dat alle kaarten in een rij even hoog zijn
 
   .image-wrapper {
     position: relative;
@@ -60,12 +74,13 @@
       top: 20px;
       right: 20px;
       background: rgba($primary-color, 0.9);
-      color: white;
-      padding: 5px 15px;
+      color: $white;
+      padding: 8px 16px;
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 2px;
       backdrop-filter: blur(5px);
+      z-index: 2;
     }
   }
 
@@ -73,7 +88,7 @@
     padding: 35px;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    flex: 1; // Zorgt dat de content-sectie de kaart vult
 
     .room-header {
       display: flex;
@@ -85,6 +100,7 @@
         font-family: "Georgia", serif;
         font-size: 1.8rem;
         margin: 0;
+        color: $primary-color;
       }
 
       .capacity {
@@ -97,14 +113,14 @@
     }
 
     .room-description {
-      color: rgba($primary-color, 0.7);
+      color: rgba($text-color, 0.8);
       font-size: 0.95rem;
       line-height: 1.7;
       margin-bottom: 30px;
     }
 
     .room-footer {
-      margin-top: auto;
+      margin-top: auto; // Druk de footer naar de onderkant van de kaart
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -112,14 +128,14 @@
       border-top: 1px solid rgba($primary-color, 0.05);
 
       .price-indicator {
-        font-weight: 600;
+        font-weight: 700;
         color: $primary-color;
-        font-size: 0.9rem;
+        font-size: 1rem;
       }
 
       .view-button {
         text-decoration: none;
-        color: $primary-color;
+        color: $text-color;
         font-weight: 700;
         text-transform: uppercase;
         font-size: 0.8rem;
@@ -137,8 +153,9 @@
   }
 
   &:hover {
+    // Gebruik de transition variabele voor consistentie
     transform: translateY(-10px);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 20px 40px rgba($primary-color, 0.12);
 
     .image-wrapper img {
       transform: scale(1.1);
@@ -146,11 +163,25 @@
   }
 }
 
+// --- Mobiele optimalisaties ---
 @media (max-width: 600px) {
   .rooms-grid {
     grid-template-columns: 1fr;
+    padding: 20px 15px;
+    gap: 20px;
   }
-  .rooms-header h1 {
-    font-size: 2.5rem;
+
+  .room-card {
+    .image-wrapper {
+      height: 250px;
+    }
+
+    .room-content {
+      padding: 25px;
+
+      .room-header h2 {
+        font-size: 1.5rem;
+      }
+    }
   }
 }

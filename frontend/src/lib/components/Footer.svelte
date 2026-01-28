@@ -4,7 +4,8 @@
       <div class="stars">★★★★★</div>
       <span class="footer-logo">STARHOTEL</span>
       <p class="footer-description">
-        Ervaar ongekende luxe en comfort in het hart van de stad. Uw toevluchtsoord voor stijlvol reizen.
+        Ervaar ongekende luxe en comfort in het hart van de stad. Uw
+        toevluchtsoord voor stijlvol reizen.
       </p>
     </div>
 
@@ -44,7 +45,7 @@
 
   <div class="footer-bottom">
     <div class="footer-bottom-content">
-      <p>© 2026 Starhotel. Elegantie opnieuw gedefinieerd.</p>
+      <p>© 2026 Starhotel. Alle rechten voorbehouden.</p>
       <div class="legal-links">
         <a href="/terms">Algemene voorwaarden</a>
         <span>|</span>

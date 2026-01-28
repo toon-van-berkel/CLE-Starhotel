@@ -21,7 +21,7 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: #f8f3ee;
-  color: $primary-color; 
+  color: $primary-color;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 1.6;
   display: flex;
@@ -29,20 +29,14 @@ body {
   align-items: center;
 }
 
-main {
-
-  flex: 1; 
-  max-width: 1500px;
-}
-
 section {
-    padding: 40px 50px;
+  padding: 40px 50px;
 }
 
 h1,
 h2,
 h3 {
-  font-family: "Georgia", serif; 
+  font-family: "Georgia", serif;
   margin-bottom: 1.5rem;
   font-weight: 400;
   letter-spacing: 1px;
@@ -68,7 +62,6 @@ li {
   margin-bottom: 0.5rem;
 }
 
-
 main a {
   color: $primary-color;
   text-decoration: underline;
@@ -93,7 +86,6 @@ button {
   color: white;
   padding: 12px 25px;
   border: none;
-  border-radius: 2px;
   cursor: pointer;
   font-size: 14px;
   font-weight: 600;
