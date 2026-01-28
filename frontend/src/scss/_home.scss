@@ -1,0 +1,355 @@
+.home-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.hero {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  margin-left: calc(-50vw + 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.6)
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    padding: 0 20px;
+
+    .stars {
+      color: $accent-color;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      letter-spacing: 6px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      font-family: "Georgia", serif;
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      color: white;
+      text-transform: none;
+      line-height: 1.1;
+      text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    p {
+      font-size: 1.4rem;
+      margin-bottom: 3rem;
+      font-style: italic;
+      color: rgba(white, 0.95);
+      letter-spacing: 1px;
+    }
+  }
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 18px 40px;
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  transition: $transition;
+  display: inline-block;
+  margin: 10px;
+}
+
+.btn-primary {
+  background-color: $accent-color;
+  color: white;
+  border: 1px solid $accent-color;
+  &:hover {
+    background-color: transparent;
+    color: $accent-color;
+    transform: translateY(-5px);
+  }
+}
+
+.btn-secondary {
+  border: 1px solid white;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: $primary-color;
+    transform: translateY(-5px);
+  }
+}
+
+.intro-section {
+  padding: 120px 0;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto;
+
+  h2 {
+    font-size: 2.8rem;
+    margin-bottom: 2rem;
+    color: $primary-color;
+  }
+
+  p {
+    font-size: 1.15rem;
+    color: rgba($primary-color, 0.8);
+    line-height: 2.1;
+  }
+
+  .small-hr {
+    width: 80px;
+    margin: 50px auto;
+    border-top: 2px solid $accent-color;
+  }
+}
+
+.feature-section {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 120px;
+
+  .feature-card {
+    background: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+    transition: $transition;
+    overflow: hidden;
+
+    .card-image {
+      height: 350px;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s ease;
+    }
+
+    .placeholder-suite {
+      background-image: url("https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800");
+    }
+    .placeholder-spa {
+      background-image: url("https://images.unsplash.com/photo-1544161515-436cefb54a73?auto=format&fit=crop&w=800");
+    }
+    .placeholder-dining {
+      background-image: url("https://images.unsplash.com/photo-1550966843-9102d33458ff?auto=format&fit=crop&w=800");
+    }
+
+    .card-text {
+      padding: 40px;
+      text-align: center;
+
+      h3 {
+        font-family: "Georgia", serif;
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+        color: $primary-color;
+      }
+
+      p {
+        font-size: 0.95rem;
+        color: rgba($primary-color, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    }
+
+    &:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+
+      .card-image {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+.philosophy-section {
+  display: flex;
+  align-items: stretch;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: white;
+  min-height: 700px;
+
+  .philosophy-image {
+    flex: 1;
+    background-image: url("https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .philosophy-text {
+    flex: 1;
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff;
+
+    .subtitle {
+      color: $accent-color;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 3rem;
+      margin-bottom: 30px;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: rgba($primary-color, 0.8);
+      margin-bottom: 40px;
+    }
+
+    .text-link {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      border-bottom: 2px solid $accent-color;
+      width: fit-content;
+      padding-bottom: 5px;
+      transition: $transition;
+
+      &:hover {
+        color: $accent-color;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+.testimonials {
+  padding: 140px 0;
+  text-align: center;
+  background-color: #f2ede7;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  box-shadow: inset 0 10px 30px rgba(0, 0, 0, 0.02);
+
+  .testimonial-content {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 0 40px;
+
+    .quote-icon {
+      font-family: "Georgia", serif;
+      font-size: 10rem;
+      color: $accent-color;
+      line-height: 0;
+      display: block;
+      opacity: 0.2;
+      margin-bottom: -20px;
+    }
+
+    blockquote {
+      font-family: "Georgia", serif;
+      font-size: 2.2rem;
+      font-style: italic;
+      color: $primary-color;
+      margin-bottom: 40px;
+      line-height: 1.4;
+    }
+
+    cite {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.9rem;
+      color: $accent-color;
+      font-weight: 700;
+      font-style: normal;
+    }
+  }
+}
+
+.cta-section {
+  padding: 150px 50px;
+  background-image: url("https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1920");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  display: flex;
+  justify-content: center;
+
+  .cta-box {
+    background-color: white;
+    padding: 80px 100px;
+    text-align: center;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    p {
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+      color: rgba($primary-color, 0.7);
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 3.2rem;
+  }
+  .feature-section {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .philosophy-text {
+    padding: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .feature-section {
+    grid-template-columns: 1fr;
+  }
+  .philosophy-section {
+    flex-direction: column;
+    .philosophy-image {
+      height: 400px;
+      width: 100%;
+    }
+    .philosophy-text {
+      padding: 40px 20px;
+    }
+  }
+  .testimonials blockquote {
+    font-size: 1.5rem;
+  }
+  .cta-box {
+    padding: 50px 30px;
+  }
+}

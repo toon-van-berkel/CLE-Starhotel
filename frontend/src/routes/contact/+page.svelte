@@ -1,6 +1,5 @@
 <script lang="ts">
-  import "../../scss/_contact.scss";
-
+  import "../../scss/style.scss";
   import { sendContact } from "$lib/api/contact/contactSend";
 
   let form = {
@@ -21,12 +20,8 @@
     if (!form.title) fieldErrors.title = "Title is required";
     if (!form.message) fieldErrors.message = "Message is required";
 
-    if (Object.keys(fieldErrors).length > 0) {
-      console.error("Validation failed", fieldErrors);
-      return;
-    }
+    if (Object.keys(fieldErrors).length > 0) return;
 
-    console.log("Submitting contact form with", form);
     try {
       result = await sendContact({
         name: form.name,
@@ -36,56 +31,89 @@
         message: form.message,
         created_at: new Date().toISOString(),
       });
-      console.log("Submission result:", result);
     } catch (error) {
       console.error("Submission failed:", error);
     }
   }
 </script>
 
-<div class="contact-form">
-  <h1>Contact Us</h1>
-  {#if fieldErrors.name}<div class="err">{fieldErrors.name}</div>{/if}
-  <input
-    type="text"
-    class="form-input"
-    bind:value={form.name}
-    placeholder="Name"
-  />
-  {#if fieldErrors.email}<div class="err">{fieldErrors.email}</div>{/if}
-
-  <input
-    type="email"
-    class="form-input"
-    bind:value={form.email}
-    placeholder="Email"
-  />
-  {#if fieldErrors.reason}<div class="err">{fieldErrors.reason}</div>{/if}
-
-  <div class="field">
-    <select id="reason" class="form-select" bind:value={form.reason}>
-      <option value="" disabled>Select a reason</option>
-      <option value="General question">General question</option>
-      <option value="Support">Support</option>
-      <option value="Bug report">Bug report</option>
-      <option value="Feature request">Feature request</option>
-      <option value="Other">Other</option>
-    </select>
+<div class="contact-page">
+  <div class="contact-header">
+    <span class="subtitle">Get in Touch</span>
+    <h1>Contact Us</h1>
+    <p>How can we assist you in making your stay unforgettable?</p>
   </div>
-  {#if fieldErrors.title}<div class="err">{fieldErrors.title}</div>{/if}
-  <input
-    type="text"
-    class="form-input"
-    bind:value={form.title}
-    placeholder="Title"
-  />
 
-  {#if fieldErrors.message}<div class="err">{fieldErrors.message}</div>{/if}
-  <textarea
-    class="form-textarea"
-    bind:value={form.message}
-    placeholder="Message"
-  ></textarea>
+  <div class="contact-container">
+    {#if result?.ok}
+      <div class="success-message">
+        <h2>Thank you, {form.name}</h2>
+        <p>Your message has been sent. Our team will contact you shortly.</p>
+        <button on:click={() => (result = null)} class="btn-primary"
+          >Send another</button
+        >
+      </div>
+    {:else}
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <input
+              type="text"
+              class:invalid={fieldErrors.name}
+              bind:value={form.name}
+              placeholder="Full Name"
+            />
+            {#if fieldErrors.name}<span class="err">{fieldErrors.name}</span
+              >{/if}
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              class:invalid={fieldErrors.email}
+              bind:value={form.email}
+              placeholder="Email Address"
+            />
+            {#if fieldErrors.email}<span class="err">{fieldErrors.email}</span
+              >{/if}
+          </div>
+        </div>
 
-  <input type="button" class="form-button" value="submit" onclick={onSubmit} />
+        <div class="form-group">
+          <select class:invalid={fieldErrors.reason} bind:value={form.reason}>
+            <option value="" disabled selected>Reason for contact</option>
+            <option value="General question">General question</option>
+            <option value="Support">Support</option>
+            <option value="Bug report">Bug report</option>
+            <option value="Feature request">Feature request</option>
+            <option value="Other">Other</option>
+          </select>
+          {#if fieldErrors.reason}<span class="err">{fieldErrors.reason}</span
+            >{/if}
+        </div>
+
+        <div class="form-group">
+          <input
+            type="text"
+            class:invalid={fieldErrors.title}
+            bind:value={form.title}
+            placeholder="Subject Title"
+          />
+          {#if fieldErrors.title}<span class="err">{fieldErrors.title}</span
+            >{/if}
+        </div>
+
+        <div class="form-group">
+          <textarea
+            class:invalid={fieldErrors.message}
+            bind:value={form.message}
+            placeholder="How can we help?"
+          ></textarea>
+          {#if fieldErrors.message}<span class="err">{fieldErrors.message}</span
+            >{/if}
+        </div>
+
+        <button class="form-button" on:click={onSubmit}>Send Message</button>
+      </div>
+    {/if}
+  </div>
 </div>
