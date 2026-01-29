@@ -1,0 +1,53 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: starhotel_db
+    environment:
+      MYSQL_DATABASE: starhotel
+      MYSQL_USER: starhotel
+      MYSQL_PASSWORD: starhotel
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: starhotel_backend
+    depends_on:
+      - db
+    ports:
+      - "8080:80"
+    environment:
+      # Voor je PHP code (gebruik deze hostnaam "db" in PDO)
+      DB_HOST: db
+      DB_NAME: starhotel
+      DB_USER: starhotel
+      DB_PASS: starhotel
+    volumes:
+      # Handig voor development: live PHP changes zonder rebuild
+      - ./backend:/var/www/html
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: starhotel_frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
+    environment:
+      # SvelteKit: laat je fetches naar je PHP API gaan
+      # (pas aan als je een andere base gebruikt)
+      VITE_API_BASE_URL: "http://localhost:8080"
+    volumes:
+      # Live reload
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  db_data:

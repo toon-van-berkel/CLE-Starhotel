@@ -31,13 +31,13 @@
       <span class="arrow">→</span>
     </a>
 
-    <a href="/admin/rooms" class="admin-card">
+    <!-- <a href="/admin/rooms" class="admin-card">
       <div class="card-icon">🏨</div>
       <div class="card-content">
         <h3>Kamerbeheer</h3>
         <p>Pas kamerdetails, prijzen en status aan.</p>
       </div>
       <span class="arrow">→</span>
-    </a>
+    </a> -->
   </div>
 </section>

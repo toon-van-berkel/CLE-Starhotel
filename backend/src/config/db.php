@@ -10,10 +10,10 @@ function db(): PDO
     static $pdo = null;
     if ($pdo instanceof PDO) return $pdo;
 
-    $host = env('DB_HOST', '127.0.0.1');
-    $db   = env('DB_NAME', 'cle2');
-    $user = env('DB_USER', 'root');
-    $pass = env('DB_PASS', '');
+    $host = getenv('DB_HOST') ?: 'db';
+    $db   = getenv('DB_NAME') ?: 'starhotel';
+    $user = getenv('DB_USER') ?: 'starhotel';
+    $pass = getenv('DB_PASS') ?: 'starhotel';
     $charset = env('DB_CHARSET', 'utf8mb4');
 
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
