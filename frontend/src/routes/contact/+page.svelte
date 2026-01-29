@@ -39,18 +39,21 @@
 
 <div class="contact-page">
   <div class="contact-header">
-    <span class="subtitle">Get in Touch</span>
-    <h1>Contact Us</h1>
-    <p>How can we assist you in making your stay unforgettable?</p>
+    <span class="subtitle">Neem contact op</span>
+    <h1>Hoe kunnne wij u helpen?</h1>
+    <p>Hoe kunnen wij u helpen om uw verblijf onvergetelijk te maken?</p>
   </div>
 
   <div class="contact-container">
     {#if result?.ok}
       <div class="success-message">
-        <h2>Thank you, {form.name}</h2>
-        <p>Your message has been sent. Our team will contact you shortly.</p>
+        <h2>Bedankt, {form.name}</h2>
+        <p>
+          Uw bericht is verzonden. Ons team neemt zo spoedig mogelijk contact
+          met u op.
+        </p>
         <button on:click={() => (result = null)} class="btn-primary"
-          >Send another</button
+          >Stuur nog een bericht</button
         >
       </div>
     {:else}
@@ -61,7 +64,7 @@
               type="text"
               class:invalid={fieldErrors.name}
               bind:value={form.name}
-              placeholder="Full Name"
+              placeholder="Volledige Naam"
             />
             {#if fieldErrors.name}<span class="err">{fieldErrors.name}</span
               >{/if}
@@ -71,7 +74,7 @@
               type="email"
               class:invalid={fieldErrors.email}
               bind:value={form.email}
-              placeholder="Email Address"
+              placeholder="E-mailadres"
             />
             {#if fieldErrors.email}<span class="err">{fieldErrors.email}</span
               >{/if}
@@ -80,12 +83,12 @@
 
         <div class="form-group">
           <select class:invalid={fieldErrors.reason} bind:value={form.reason}>
-            <option value="" disabled selected>Reason for contact</option>
-            <option value="General question">General question</option>
+            <option value="" disabled selected>Rede voor contact</option>
+            <option value="Algemene vraag">Algemene vraag</option>
             <option value="Support">Support</option>
-            <option value="Bug report">Bug report</option>
-            <option value="Feature request">Feature request</option>
-            <option value="Other">Other</option>
+            <option value="Bug melding">Bug melding</option>
+            <option value="Ideeverzoek">Feature request</option>
+            <option value="Anders">Anders</option>
           </select>
           {#if fieldErrors.reason}<span class="err">{fieldErrors.reason}</span
             >{/if}
@@ -106,13 +109,14 @@
           <textarea
             class:invalid={fieldErrors.message}
             bind:value={form.message}
-            placeholder="How can we help?"
+            placeholder="Hoe kunnen wij u helpen?"
           ></textarea>
           {#if fieldErrors.message}<span class="err">{fieldErrors.message}</span
             >{/if}
         </div>
 
-        <button class="form-button" on:click={onSubmit}>Send Message</button>
+        <button class="form-button" on:click={onSubmit}>Verstuur Bericht</button
+        >
       </div>
     {/if}
   </div>

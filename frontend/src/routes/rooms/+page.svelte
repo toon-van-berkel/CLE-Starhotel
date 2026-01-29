@@ -8,9 +8,9 @@
 
 <div class="rooms-page">
   <div class="rooms-header">
-    <span class="subtitle">Our Accommodations</span>
-    <h1>Rooms & Suites</h1>
-    <p>Selected with an eye for detail, designed for your comfort.</p>
+    <span class="subtitle">Onze Kamers</span>
+    <h1>Kamers & Suites</h1>
+    <p>Oog voor detail, ontworpen voor uw comfort.</p>
   </div>
 
   {#if !roomsData.records || roomsData.records.length === 0}
@@ -28,7 +28,7 @@
               src="/Hotel-Kamer.png"
               alt="Room {room.number}"
             />
-            <div class="status-badge">Luxury Suite</div>
+            <div class="status-badge">Luxe verblijf</div>
           </div>
 
           <div class="room-content">
@@ -40,18 +40,18 @@
             </div>
 
             <p class="room-description">
-              Experience elegance in this spacious room featuring bespoke
-              furniture, premium linens, and a stunning city view.
+              Ervaar elegantie in deze ruime kamer met op maat gemaakte meubels,
+              luxe beddengoed en een prachtig uitzicht over de stad.
             </p>
 
             <div class="room-footer">
-              <span class="price-indicator">From €249 / night</span>
+              <span class="price-indicator">Voor €249 / nacht</span>
               <a
                 href={`rooms/room-${room.id}`}
                 data-sveltekit-reload
                 class="view-button"
               >
-                Explore Room
+                Ondek deze kamer
               </a>
             </div>
           </div>
