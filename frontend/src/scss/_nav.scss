@@ -1,0 +1,97 @@
+nav {
+  width: 100%;
+  max-width: 1500px;
+  padding: 2rem 0;
+
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.nav-group {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.logo-square {
+  background-color: $primary-color;
+  color: $white !important;
+  text-decoration: none;
+  font-weight: 800;
+  padding: 0.8rem 1.2rem;
+  border-radius: 2px;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  transition: $transition;
+
+  &:hover {
+    background-color: $accent-color;
+    transform: translateY(-2px);
+  }
+}
+
+.hotel-name {
+  text-decoration: none;
+  color: $primary-color;
+  font-family: "Georgia", serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: $transition;
+
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+.nav-link {
+  text-decoration: none;
+  color: $primary-color;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  transition: $transition;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: $accent-color;
+    transition: width 0.3s ease;
+  }
+
+  &:hover {
+    color: $accent-color;
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+.login-btn,
+.profile-btn {
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  padding: 0.6rem 1.5rem !important;
+  border-radius: 0;
+  transition: $transition;
+
+  &:hover {
+    background-color: $accent-color;
+    border-color: $accent-color;
+    color: $white !important;
+    transform: translateY(-2px);
+  }
+}

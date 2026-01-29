@@ -1,22 +1,28 @@
 <script lang="ts">
-    import type { RoomRecordResponse } from '$lib/api/client/apiTypes';
-    import images from "$lib/imageData/imageData.json";
-    export let data: { roomData: RoomRecordResponse };
+  import type { RoomRecordResponse } from "$lib/api/client/apiTypes";
+  import images from "$lib/imageData/imageData.json";
+  export let data: { roomData: RoomRecordResponse };
 
-    let currentIndex = 0;
+  let currentIndex = 0;
+  // 1. Variabele voor de status
+  let showOverlay = false;
 
-    function nextImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-    }
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+  }
 
-    function prevImage() {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-    }
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+  }
 
-    function selectImage(index: number) {
-        currentIndex = index;
-    }
+  function selectImage(index: number) {
+    currentIndex = index;
+  }
 
+  // 2. Functie om te openen/sluiten
+  function toggleOverlay() {
+    showOverlay = !showOverlay;
+  }
 </script>
 
 {#if data.roomData.record}
@@ -46,20 +52,11 @@
             onclick={nextImage}
             aria-label="Next image">→</button
           >
-          <button class="overlay-btn">Klik om foto te vergroten</button>
+          <button class="overlay-btn" onclick={toggleOverlay}
+            >Klik om foto te vergroten</button
+          >
         </div>
 
-        <div class="indicators-images">
-          {#each images as image, index}
-            <button
-              class="indicator {index === currentIndex ? 'active' : ''}"
-              onclick={() => selectImage(index)}
-              aria-label="Go to image {index + 1}"
-            >
-              <img src={image.src} alt={image.alt} />
-            </button>
-          {/each}
-        </div>
         <div class="thumbnails">
           {#each images as image, index}
             <button
@@ -72,36 +69,15 @@
           {/each}
         </div>
       </div>
-
-      <!-- <div class="room-details-card">
-        <h2>Kamer details</h2>
-        <div class="facilities-container">
-          <div class="facility-card">
-            <h3>Faciliteiten</h3>
-            <ul>
-              <li>King-size bed</li>
-              <li>Regendouche</li>
-              <li>Snelle Wifi</li>
-              <li>4K Smart TV</li>
-            </ul>
-          </div>
-          <div class="facility-card">
-            <h3>Also includes</h3>
-            <ul>
-              <li>Ontbijt</li>
-              <li>Gym</li>
-              <li>Zwembad</li>
-              <li>24/7 room service</li>
-              <li>Gratis parkeren</li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
     </div>
     <div class="reservation-card">
       <div class="reservation-content">
         <h2>Reserveren</h2>
-        <a href="/rooms/room-{data.roomData.record.id}/book-{data.roomData.record.id}" class="reserve-btn">Reserveer deze kamer</a>
+        <a
+          href="/rooms/room-{data.roomData.record.id}/book-{data.roomData.record
+            .id}"
+          class="reserve-btn">Reserveer deze kamer</a
+        >
         <a href="/rooms">
           <button class="rooms-btn">Terug naar Rooms</button>
         </a>
@@ -109,6 +85,40 @@
     </div>
   </div>
 {:else}
-    <div>Room not found</div>
+  <div>Room not found</div>
 {/if}
 
+{#if showOverlay}
+  <div
+    class="image-lightbox"
+    role="button"
+    tabindex="0"
+    onclick={toggleOverlay}
+    onkeydown={(e) => e.key === "Escape" && toggleOverlay()}
+  >
+    <div
+      class="lightbox-content"
+      role="none"
+      onclick={(e) => e.stopPropagation()}
+    >
+      <button class="close-overlay" onclick={toggleOverlay}>Sluiten ×</button>
+
+      <div class="lightbox-main">
+        <button class="nav-btn prev" onclick={prevImage}>←</button>
+        <img src={images[currentIndex].src} alt={images[currentIndex].alt} />
+        <button class="nav-btn next" onclick={nextImage}>→</button>
+      </div>
+
+      <div class="thumbnails lightbox-thumbs">
+        {#each images as image, index}
+          <button
+            class="thumbnail-btn {index === currentIndex ? 'active' : ''}"
+            onclick={() => selectImage(index)}
+          >
+            <img class="thumbnail-image" src={image.src} alt={image.alt} />
+          </button>
+        {/each}
+      </div>
+    </div>
+  </div>
+{/if}

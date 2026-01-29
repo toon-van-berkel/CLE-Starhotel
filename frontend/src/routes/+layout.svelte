@@ -8,5 +8,7 @@
 </script>
 
 <Navbar user={data.user} />
+<main>
 <slot />
+</main>
 <Footer></Footer>

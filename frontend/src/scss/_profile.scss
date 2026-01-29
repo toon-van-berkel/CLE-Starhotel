@@ -1,0 +1,112 @@
+.profile-page {
+  margin: 120px auto;
+  padding: 0 40px;
+
+  .profile-header {
+    text-align: left;
+    margin-bottom: 4rem;
+    border-left: 4px solid $accent-color;
+    padding-left: 2rem;
+
+    .subtitle {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 0.75rem;
+      color: $accent-color;
+      font-weight: 700;
+      display: block;
+    }
+
+    h1 {
+      font-family: "Georgia", serif;
+      font-size: 3.5rem;
+      color: $primary-color;
+      margin: 0.5rem 0;
+    }
+
+    p {
+      color: rgba($primary-color, 0.5);
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.profile-card {
+  background: white;
+  border: 1px solid rgba($primary-color, 0.1);
+  padding: 4rem;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+
+    .info-item {
+      border-bottom: 1px solid rgba($primary-color, 0.05);
+      padding-bottom: 1.5rem;
+
+      .label {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: rgba($primary-color, 0.4);
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 700;
+      }
+
+      .value {
+        font-size: 1.25rem;
+        color: $primary-color;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: flex-start;
+
+  .logout-btn {
+    background-color: $primary-color;
+    border: none;
+    color: white;
+    padding: 1.2rem 3rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover:not(:disabled) {
+      background-color: $accent-color;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba($accent-color, 0.2);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.error-toast {
+  margin-top: 2rem;
+  background-color: #fff5f5;
+  color: #d9534f;
+  padding: 1rem;
+  border-left: 4px solid #d9534f;
+  font-size: 0.9rem;
+}
