@@ -40,7 +40,7 @@
 <div class="contact-page">
   <div class="contact-header">
     <span class="subtitle">Neem contact op</span>
-    <h1>Hoe kunnne wij u helpen?</h1>
+    <h1>Hoe kunnen wij u helpen?</h1>
     <p>Hoe kunnen wij u helpen om uw verblijf onvergetelijk te maken?</p>
   </div>
 
@@ -83,7 +83,7 @@
 
         <div class="form-group">
           <select class:invalid={fieldErrors.reason} bind:value={form.reason}>
-            <option value="" disabled selected>Rede voor contact</option>
+            <option value="" disabled selected>Reden voor contact</option>
             <option value="Algemene vraag">Algemene vraag</option>
             <option value="Support">Support</option>
             <option value="Bug melding">Bug melding</option>
