@@ -20,6 +20,9 @@
         <li><a class="nav-link profile-btn" href="/profile">Profiel</a></li>
       {:else}
         <li><a class="nav-link login-btn" href="/login">Login</a></li>
+        <li>
+          <a class="nav-link register-btn" href="/register">Registreren</a>
+        </li>
       {/if}
     </div>
   </ul>

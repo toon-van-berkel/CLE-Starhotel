@@ -33,9 +33,9 @@
 
           <div class="room-content">
             <div class="room-header">
-              <h2>Room {room.number}</h2>
+              <h2>Kamer {room.number}</h2>
               <div class="capacity">
-                <span>Max Guests: {room.max_capacity}</span>
+                <span>Aantal personen: {room.max_capacity}</span>
               </div>
             </div>
 
@@ -51,7 +51,7 @@
                 data-sveltekit-reload
                 class="view-button"
               >
-                Ondek deze kamer
+                Ontdek deze kamer
               </a>
             </div>
           </div>
